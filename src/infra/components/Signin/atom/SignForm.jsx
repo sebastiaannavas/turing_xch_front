@@ -20,9 +20,15 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export default function SignForm () {
 
+    // psw visibility 1
     const [show, setShow] = useState(false);
-
+    
     const handleClick = () => setShow(!show);
+    
+    // psw visibility 2
+    const [showOk, setShowOk] = useState(false);
+
+    const handleClickOk = () => setShowOk(!showOk);
 
     const { register, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
@@ -41,24 +47,24 @@ export default function SignForm () {
     };
 
     // MOCK
-    const [email, setEmail] = useState("alan@turing.com");
-    const [psw, setPsw] = useState("Alanturing123.");
-    const users = [{ email: "alan@turing.com", psw: "Alanturing123." }];
+    // const [email, setEmail] = useState("alan@turing.com");
+    // const [psw, setPsw] = useState("Alanturing123.");
+    // const users = [{ email: "alan@turing.com", psw: "Alanturing123." }];
 
     // const [auth, setAuth] = useState(localStorage.getItem(localStorage.getItem("auth") || false));
-    let [auth, setAuth] = useState(false);
+    // let [auth, setAuth] = useState(false);
 
     const onSubmit = async ( payload ) => {
 
         try {
 
             // MOCK
-            const account = users.find( (user) => user.email == email );
-            if (account && account.psw == psw) {
-                setAuth(true);
-                localStorage.setItem("auth", true);
-                console.log(auth);
-            }
+            // const account = users.find( (user) => user.email == email );
+            // if (account && account.psw == psw) {
+            //     setAuth(true);
+            //     localStorage.setItem("auth", true);
+            //     console.log(auth);
+            // }
 
             // await axios.post(POST.NEW_USER, payload);
             resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
@@ -72,41 +78,23 @@ export default function SignForm () {
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Stack
-                gap={2}
+                gap={4}
                 >
                     <FormControl isInvalid={errors.fname}>
-                        <FormLabel> Nombre </FormLabel>
-                            <Input type="text" size="sm" placeholder="Alan" 
+                        <FormLabel> Nombre y apellido </FormLabel>
+                            <Input type="text" size="md" placeholder="Alan Turing" 
                             
                             {...register("fname")} 
                             />
                         <FormErrorMessage> {errors.fname && ERROR_YUP.MSG_NAME} </FormErrorMessage>
                     </FormControl>
 
-                    <FormControl isInvalid={errors.lname}>
-                        <FormLabel> Apellido </FormLabel>
-                            <Input type="text" size="sm" placeholder="Turing" 
-
-                            {...register("lname")}
-                            />
-                        <FormErrorMessage> {errors.lname && ERROR_YUP.MSG_NAME} </FormErrorMessage>
-                    </FormControl>
-                    
-                    <FormControl isInvalid={errors.alias}>
-                        <FormLabel> Alias de seguridad </FormLabel>
-                            <Input type="text" size="sm" placeholder="enigma.breaker18" 
-
-                            {...register("alias")} 
-                            />
-                        <FormErrorMessage> {errors.alias && ERROR_YUP.MSG_ALIAS} </FormErrorMessage>
-                    </FormControl>
-
                     <FormControl isInvalid={errors.email}>
                         <FormLabel> Correo electrónico </FormLabel>
-                            <Input type="email" size="sm" placeholder="alan@turing.com" 
+                            <Input type="email" size="md" placeholder="alan@turing.com" 
                             // MOCK
-                            value={email}
-                            onChange={ (event) => setEmail(event.target.value) }
+                            // value={email}
+                            // onChange={ (event) => setEmail(event.target.value) }
 
                             {...register("email")} 
                             />
@@ -115,21 +103,36 @@ export default function SignForm () {
 
                     <FormControl isInvalid={errors.psw}>
                         <FormLabel> Contraseña </FormLabel>
-                            <InputGroup size="sm">
+                            <InputGroup size="md">
                                 <Input placeholder="Ingresa una contraseña" type={show ? 'text' : 'password'}
                                 // MOCK
-                                value={psw}
-                                onChange={ (event) => setPsw(event.target.value) }
+                                // value={psw}
+                                // onChange={ (event) => setPsw(event.target.value) }
 
                                 {...register("psw")}
                                 />
                                 <InputRightElement>
-                                    <IconButton size="sm" variant={"ghost"} onClick={handleClick}
+                                    <IconButton size="md" variant={"ghost"} onClick={handleClick}
                                     icon={show ? < Visibility fontSize="small" /> : < VisibilityOff fontSize="small" />} 
                                     />
                                 </InputRightElement>
                             </InputGroup>
                         <FormErrorMessage> {errors.psw && ERROR_YUP.MSG_PSW} </FormErrorMessage>   
+                    </FormControl>
+
+                    <FormControl isInvalid={errors.okPsw}>
+                        <FormLabel> Confirmar contraseña </FormLabel>
+                            <InputGroup size="md">
+                                <Input placeholder="Confirma tu contraseña" type={showOk ? 'text' : 'password'}
+                                {...register("okPsw")}
+                                />
+                                <InputRightElement>
+                                    <IconButton size="sm" variant={"ghost"} onClick={handleClickOk}
+                                    icon={showOk ? < Visibility fontSize="small" /> : < VisibilityOff fontSize="small" />} 
+                                    />
+                                </InputRightElement>
+                            </InputGroup>
+                        <FormErrorMessage> {errors.okPsw && ERROR_YUP.MSG_OKPSW} </FormErrorMessage>   
                     </FormControl>
 
                     <Stack pt={4}>
