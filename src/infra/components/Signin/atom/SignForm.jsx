@@ -4,6 +4,7 @@ import { POST } from "../../../api/endpoints";
 import { schema, ERROR_YUP } from "../../../api/yup";
 
 // hooks
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -46,28 +47,36 @@ export default function SignForm () {
         });
     };
 
-    // MOCK
-    // const [email, setEmail] = useState("alan@turing.com");
-    // const [psw, setPsw] = useState("Alanturing123.");
-    // const users = [{ email: "alan@turing.com", psw: "Alanturing123." }];
+    const navigate = useNavigate();
 
-    // const [auth, setAuth] = useState(localStorage.getItem(localStorage.getItem("auth") || false));
-    // let [auth, setAuth] = useState(false);
+
+    // --- MOCK
+
+    const [email, setEmail] = useState("alan@turing.com");
+    const [psw, setPsw] = useState("Alanturing123.");
+    const users = [{ email: "alan@turing.com", psw: "Alanturing123." }];
+
+    // --- MOCK
+
 
     const onSubmit = async ( payload ) => {
 
         try {
 
-            // MOCK
-            // const account = users.find( (user) => user.email == email );
-            // if (account && account.psw == psw) {
-            //     setAuth(true);
-            //     localStorage.setItem("auth", true);
-            //     console.log(auth);
-            // }
-
             // await axios.post(POST.NEW_USER, payload);
-            resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
+
+            // --- MOCK
+
+            const account = users.find( (user) => user.email === email );
+            if (account && account.psw === psw) {
+                localStorage.setItem("auth", true);
+                navigate("/dashboard");
+                resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
+            } else {
+                resultToast("error", "Aún no tienes una cuenta 😟");
+            }
+
+            // --- MOCK
         } 
         catch (error) { 
             resultToast("error", "Se produjo un problema 😥");
@@ -92,9 +101,12 @@ export default function SignForm () {
                     <FormControl isInvalid={errors.email}>
                         <FormLabel> Correo electrónico </FormLabel>
                             <Input type="email" size="md" placeholder="alan@turing.com" 
-                            // MOCK
-                            // value={email}
-                            // onChange={ (event) => setEmail(event.target.value) }
+                            // --- MOCK
+
+                            value={email}
+                            onChange={ (event) => setEmail(event.target.value) }
+
+                            // --- MOCK
 
                             {...register("email")} 
                             />
@@ -105,9 +117,12 @@ export default function SignForm () {
                         <FormLabel> Contraseña </FormLabel>
                             <InputGroup size="md">
                                 <Input placeholder="Ingresa una contraseña" type={show ? 'text' : 'password'}
-                                // MOCK
-                                // value={psw}
-                                // onChange={ (event) => setPsw(event.target.value) }
+                                // --- MOCK
+
+                                value={psw}
+                                onChange={ (event) => setPsw(event.target.value) }
+
+                                // --- MOCK
 
                                 {...register("psw")}
                                 />
@@ -124,6 +139,13 @@ export default function SignForm () {
                         <FormLabel> Confirmar contraseña </FormLabel>
                             <InputGroup size="md">
                                 <Input placeholder="Confirma tu contraseña" type={showOk ? 'text' : 'password'}
+
+                                // --- MOCK
+
+                                value={psw}
+
+                                // --- MOCK
+
                                 {...register("okPsw")}
                                 />
                                 <InputRightElement>
