@@ -22,4 +22,19 @@ const schema = yup.object().shape({
     okPsw: yup.string().required().label('Confirmar contraseña').oneOf([yup.ref('psw'),null])
 });
 
-export { ERROR_YUP, schema };
+const schemaLogin = yup.object().shape({
+
+    email: yup.string().email().required(), 
+    // Pasarlo a lowercase
+    psw: yup.string().required().min(8).max(18)
+    .matches(/^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/),
+});
+
+const schemaRecoverPassword = yup.object().shape({
+
+    email: yup.string().email().required(), 
+});
+
+
+
+export { ERROR_YUP, schema, schemaRecoverPassword, schemaLogin };
