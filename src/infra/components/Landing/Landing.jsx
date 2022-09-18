@@ -1,5 +1,5 @@
 // hooks
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // components
 import { Box } from "@chakra-ui/react";
@@ -7,7 +7,7 @@ import Navbar from "../Navbar/Navbar";
 import Hero from "../Hero/Hero";
 import Partners from "../Hero/atom/Partners";
 import Features from "../Feat/Features";
-import HeroMarket from "../HeroMarket/HeroMarket";
+import Market from "../Market/Market";
 import Footer from "../Footer/Footer";
 
 // icons
@@ -47,7 +47,7 @@ export default function Landing() {
       </Box>
 
       <Features />
-      <HeroMarket />
+      <Market />
       <Footer />
 
       <Box
