@@ -11,7 +11,7 @@ export default function Login () {
         <>
             <Stack 
             minH={'100vh'} 
-            direction={{ base: 'column', md: 'row-reverse' }}
+            direction={{ base: 'column', md: 'row' }}
             >
                 <Flex 
                     flex={1}
@@ -21,15 +21,15 @@ export default function Login () {
                     align={"center"}
                     justify={"center"}
                     bgGradient={[
-                        'linear(to-b, #3B082B, #240046)'
+                        'linear(to-b, purple.500, #240046)',
                     ]}>
                     <Flex gap={4} align={"center"}>
                         <TuringIcon boxSize={[12, 16, 16, 16]} />
-                        <Heading fontSize={{ base: '2xl', sm: '3xl' }} textAlign="center" color={"yellow"} pb={2}> 
+                        <Heading fontSize={{ base: '2xl', sm: '3xl' }} textAlign="center" color={"white"} pb={2}> 
                                 Turing Exchange 
                         </Heading>
                     </Flex>
-                    <Text fontSize={["lg", "3xl", "xl", "3xl"]} textAlign="center" color={"purple.100"}> 
+                    <Text fontSize={["lg", "3xl", "xl", "3xl"]} textAlign="center" color={"gray.100"}> 
                             ¡Ingresa tus datos!
                     </Text  >
                 </Flex>
@@ -40,6 +40,7 @@ export default function Login () {
                     align={'center'} 
                     justify={'center'}>
                     <Stack 
+                        pt={[0, 0, 10, 8]}
                         maxW={'md'}
                         w={"full"}>
                         <LoginForm />

@@ -14,14 +14,9 @@ export default function Hero () {
         direction={{ base: "column", md: "row" }}
         minH={["70vh", "70vh", "35vh", "25vh"]}
         px={8}
+        // pt={[8, 8, 36, 24]} // on fixed navbar
         pt={[8, 8, 4, 4]}
         pb={8}
-        bg="#240046"
-        // bgGradient={[
-        //   'linear(to-tr, teal.300, yellow.400)',
-        //   'linear(to-t, blue.200, teal.500)',
-        //   'linear(to-b, orange.100, purple.300)',
-        // ]}
         >
             <HeroHeader 
             title={"Únete y crea tu mundo crypto"} 

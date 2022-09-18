@@ -21,7 +21,7 @@ export default function Signin () {
                 align={"center"}
                 justify={"center"}
                 bgGradient={[
-                    'linear(to-b, purple.500, #240046)',
+                    'linear(to-b, #f20089, #7209b7)'
                 ]}
                 >
                     <Flex gap={4} align={"center"}>
@@ -42,6 +42,7 @@ export default function Signin () {
                 justify={'center'}
                 >
                     <Stack 
+                    pt={[0, 0, 12, 6]}
                     maxW={'md'}
                     w={"full"}
                     >

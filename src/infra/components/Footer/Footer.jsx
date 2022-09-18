@@ -12,13 +12,12 @@ const MediaButton = ( { children, href } ) => {
         <>
             <Link
             href={href}
-            // transition={'background 0.3s ease'}
-            // _hover={{
-            //     bg: 'blackAlpha.200'
-            // }}
+            color={"gray.400"}
+            _hover={{ color: 'purple.500' }}
+            transition={'color 0.5s ease'}
             >
                 <IconContext.Provider 
-                value={{ color: "gray", size: "1.5em" }}
+                value={{ size: "1.5em" }}
                 >            
                     {children}
                 </IconContext.Provider>
@@ -55,13 +54,13 @@ export default function Footer() {
                         spacing={6}
                         align={"center"}>
                             <TuringIcon boxSize={10} />
-                            <MediaButton href={'#'}>
+                            <MediaButton href={'https://github.com/sebastiaannavas/turing_xch_front'}>
                                 <ImGithub />
                             </MediaButton>
-                            <MediaButton href={'#'}>
+                            <MediaButton href={'mailto:turingwallet@gmail.com'}>
                                 <ImMail />
                             </MediaButton>
-                            <MediaButton href={'#'}>
+                            <MediaButton href={'https://trello.com/invite/wallethackathon/acd27b940472e494f2f9189eacf56c49'}>
                                 <ImTrello />
                             </MediaButton>
                             </Stack>
@@ -78,11 +77,11 @@ export default function Footer() {
                         <ListHeader> Acerca de Turing</ListHeader>
                         <Link href={'#'}> Nosotros </Link>
                         <Link href={'#'}> Patrocinadores </Link>
-                        <Link href={'#'}> Binance API </Link>
+                        <Link href={'https://www.binance.com/es/binance-api'}> Binance API </Link>
                     </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader> Soporte </ListHeader>
-                        <Link href={'#'}> Atención al cliente </Link>
+                        <Link href={'mailto:turingwallet@gmail.com'}> Atención al cliente </Link>
                         <Link href={'#'}> Blog / FAQ </Link>
                         <Link href={'#'}> Términos y Condiciones</Link>
                         <Link href={'#'}> Política de Privacidad</Link>

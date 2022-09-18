@@ -1,7 +1,7 @@
 // dependencies
 import axios from "axios";
 import { POST } from "../../../api/endpoints";
-import { schemaRecoverPassword, ERROR_YUP } from "../../../api/yup";
+import { schema, ERROR_YUP } from "../../../api/yup";
 
 // hooks
 import { useState } from "react";
@@ -18,7 +18,7 @@ import { Button, FormControl, FormLabel, FormErrorMessage, Input,
 export default function RecoverPaswordForm () {
 
     const { register, handleSubmit, formState:{ errors } } = useForm({
-        resolver: yupResolver(schemaRecoverPassword)
+        resolver: yupResolver(schema.recover)
     });
 
     const toast = useToast();
@@ -68,8 +68,8 @@ export default function RecoverPaswordForm () {
                     gap={2}
                     px={'8px'}>
                     <FormControl isInvalid={errors.email}>
-                        <FormLabel color={'white'}> Correo electrónico </FormLabel>
-                            <Input type="email" size="md" placeholder="alan@turing.com" color={'white'}
+                        <FormLabel color={'yellow'}> Correo electrónico </FormLabel>
+                            <Input type="email" size="md" placeholder="alan@turing.com" color={'white'} variant={"filled"}
                             // MOCK
                             // value={email}
                             // onChange={ (event) => setEmail(event.target.value) }
@@ -79,7 +79,7 @@ export default function RecoverPaswordForm () {
                         <FormErrorMessage> {errors.email && ERROR_YUP.MSG_EMAIL} </FormErrorMessage>
                     </FormControl>
 
-                    <Button colorScheme={'blue'} variant={'solid'} type="submit">
+                    <Button colorScheme={'yellow'} variant={'solid'} type="submit">
                         Enviar código
                     </Button>
 

@@ -1,7 +1,7 @@
 // dependencies
 import axios from "axios";
 import { POST } from "../../../api/endpoints";
-import { schemaLogin, ERROR_YUP } from "../../../api/yup";
+import { schema, ERROR_YUP } from "../../../api/yup";
 
 // hooks
 import { useState } from "react";
@@ -11,7 +11,7 @@ import { useToast } from "@chakra-ui/react";
 
 // components
 import { Button, FormControl, FormLabel, FormErrorMessage, Input, 
-         Stack, InputGroup, InputRightElement, IconButton
+         Stack, InputGroup, InputRightElement, IconButton, Box
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
@@ -32,7 +32,7 @@ export default function LoginForm () {
     const handleClickOk = () => setShowOk(!showOk);
 
     const { register, handleSubmit, formState:{ errors } } = useForm({
-        resolver: yupResolver(schemaLogin)
+        resolver: yupResolver(schema.login)
     });
 
     const toast = useToast();
@@ -112,13 +112,19 @@ export default function LoginForm () {
                         <FormErrorMessage> {errors.psw && ERROR_YUP.MSG_PSW} </FormErrorMessage>   
                     </FormControl>
 
-                    <Stack pt={4}>
-                        <Stack
-                            direction={{ base: 'column', sm: 'row' }}
-                            align={'end'}
-                            justify={'end'}>
-                            <Link to='/RecoverPassword'>Forgot password?</Link>
-                        </Stack>
+                    <Stack 
+                    gap={4}
+                    pt={4}>
+                        <Box
+                        align={'end'}
+                        justify={'end'}
+                        fontWeight="600"
+                        color={"purple.700"}
+                        _hover={{ color: "purple.400" }}
+				        transition={'color 0.5s ease'}
+                        >
+                            <Link to='/recover'> ¿Olvidaste tu contraseña? </Link>
+                        </Box>
                         <Button colorScheme={'yellow'} variant={'solid'} type="submit">
                             Ingresar
                         </Button>

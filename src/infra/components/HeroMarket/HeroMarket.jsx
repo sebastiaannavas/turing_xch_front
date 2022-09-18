@@ -2,26 +2,6 @@
 import { Stack, Heading, Text, Highlight, Box, SimpleGrid, Button } from "@chakra-ui/react";
 import TopCards from "./atom/TopCards";
 
-// icons
-import { Search2Icon } from "@chakra-ui/icons";
-
-
-const MarketBrowserLink = () => {
-
-	return (
-		<>
-			<Stack align={"center"}>
-				<Button 
-				leftIcon={ <Search2Icon /> } 
-				colorScheme='purple'
-				p={6}
-				> 
-					Descubre más 
-				</Button>
-			</Stack>
-		</>
-	);
-}
 
 const Header = () => {
 
@@ -62,7 +42,7 @@ export default function HeroMarket() {
 			>
 				<Header />
 				<Box p={4}>
-					<SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
+					<SimpleGrid columns={[1, 1, 2, 3]} spacing={10}>
 						<TopCards />
 						<TopCards />
 						<TopCards />
@@ -71,8 +51,30 @@ export default function HeroMarket() {
 						<TopCards />
 					</SimpleGrid>
 				</Box>
-				<MarketBrowserLink />
 			</Stack>	
 		</>
     )
 }
+
+
+// ---
+
+// icons
+// import { Search2Icon } from "@chakra-ui/icons";
+
+// const MarketBrowserLink = () => {
+
+// 	return (
+// 		<>
+// 			<Stack align={"center"}>
+// 				<Button 
+// 				leftIcon={ <Search2Icon /> } 
+// 				colorScheme='purple'
+// 				p={6}
+// 				> 
+// 					Descubre más 
+// 				</Button>
+// 			</Stack>
+// 		</>
+// 	);
+// }

@@ -7,6 +7,8 @@ import { Stack, Heading, Text, Button } from "@chakra-ui/react"
 
 export default function Dashboard () {
 
+    const logout = () => localStorage.removeItem("auth");
+
     if (!localStorage.getItem("auth")) {
         
         return <Navigate replace to="/signin" />;
@@ -65,6 +67,7 @@ export default function Dashboard () {
                     <Button
                     colorScheme='red'
                     p={6}
+                    onClick={logout}
                     >
                         Cerrar sesión
                     </Button>

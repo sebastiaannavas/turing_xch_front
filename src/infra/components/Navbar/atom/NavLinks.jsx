@@ -30,21 +30,48 @@ export default function NavLinks ( {isOpen} ) {
 	return (
 		<>
 			<NavGroup isOpen={isOpen}>
-				<Link to="/" style={{ fontWeight: "bold" }}> Inicio </Link>
-				<Link to="/" style={{ fontWeight: "bold" }}> Mercado </Link>
-				<Link to="/" style={{ fontWeight: "bold" }}> Blog </Link>
-				<Link to="/" style={{ fontWeight: "bold" }}> Nosotros </Link>
+				<Box
+				_hover={{ color: "purple.400" }}
+				transition={'color 0.5s ease'}
+				>
+					<Link to="/" style={{ fontWeight: "bold" }}> Inicio </Link>
+				</Box>
+
+				<Box
+				_hover={{ color: "purple.400" }}
+				transition={'color 0.5s ease'}
+				>
+					<Link to="/" style={{ fontWeight: "bold" }}> Mercado </Link>
+				</Box>
+
+				<Box
+				_hover={{ color: "purple.400" }}
+				transition={'color 0.5s ease'}
+				>
+					<Link to="/" style={{ fontWeight: "bold" }}> Blog </Link>
+				</Box>
+
+				<Box
+				_hover={{ color: "purple.400" }}
+				transition={'color 0.5s ease'}
+				>
+					<Link to="/" style={{ fontWeight: "bold" }}> Nosotros </Link>
+				</Box>
+
 				<Stack direction="row" spacing='4'>
-				<Tooltip label='Iniciar Sesión'>
-					<IconButton 
-					color="purple.400"
-					variant="ghost" 
-					aria-label='Iniciar sesión' 
-					icon={<PersonOutline />} />
-				</Tooltip>
-				<Link to="/signin">
-					<Button colorScheme='purple'> Registrarse </Button>
-				</Link>
+					<Link to="/login">
+						<Tooltip label='Iniciar Sesión'>
+							<IconButton 
+							color="purple.400"
+							variant="ghost" 
+							aria-label='Iniciar sesión' 
+							icon={<PersonOutline />} />
+						</Tooltip>
+					</Link>
+					
+					<Link to="/signin">
+						<Button colorScheme='purple'> Registrarse </Button>
+					</Link>
 				</Stack>
 			</NavGroup>
 		</>

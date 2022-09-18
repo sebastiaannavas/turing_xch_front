@@ -32,7 +32,7 @@ export default function SignForm () {
     const handleClickOk = () => setShowOk(!showOk);
 
     const { register, handleSubmit, formState:{ errors } } = useForm({
-        resolver: yupResolver(schema)
+        resolver: yupResolver(schema.signin)
     });
 
     const toast = useToast();
@@ -64,12 +64,13 @@ export default function SignForm () {
         try {
 
             // await axios.post(POST.NEW_USER, payload);
-
+            
             // --- MOCK
-
+            
             const account = users.find( (user) => user.email === email );
             if (account && account.psw === psw) {
                 localStorage.setItem("auth", true);
+                console.log(JSON.stringify(payload));
                 navigate("/dashboard");
                 resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
             } else {
@@ -89,13 +90,13 @@ export default function SignForm () {
                 <Stack
                 gap={4}
                 >
-                    <FormControl isInvalid={errors.fname}>
+                    <FormControl isInvalid={errors.name}>
                         <FormLabel> Nombre y apellido </FormLabel>
                             <Input type="text" size="md" placeholder="Alan Turing" 
                             
-                            {...register("fname")} 
+                            {...register("name")}
                             />
-                        <FormErrorMessage> {errors.fname && ERROR_YUP.MSG_NAME} </FormErrorMessage>
+                        <FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
                     </FormControl>
 
                     <FormControl isInvalid={errors.email}>
@@ -158,7 +159,7 @@ export default function SignForm () {
                     </FormControl>
 
                     <Stack pt={4}>
-                        <Button colorScheme={'purple'} variant={'solid'} type="submit">
+                        <Button colorScheme={'yellow'} variant={'solid'} type="submit">
                             Registrarse
                         </Button>
                     </Stack>
