@@ -2,10 +2,11 @@
 import axios from "axios";
 import { POST } from "../../../api/endpoints";
 import { schema, ERROR_YUP } from "../../../api/yup";
+// import addUser from "../../../api/addUser";
 
 // hooks
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useToast } from "@chakra-ui/react";
@@ -49,39 +50,85 @@ export default function SignForm () {
 
     const navigate = useNavigate();
 
+    const [jwt, setJwt] = useState("");
+    
+    // const [authError, setJwtError] = useState("");
 
     // --- MOCK
 
-    const [email, setEmail] = useState("alan@turing.com");
-    const [psw, setPsw] = useState("Alanturing123.");
-    const users = [{ email: "alan@turing.com", psw: "Alanturing123." }];
+    // const [email, setEmail] = useState("alan@turing.com");
+    // const [psw, setPsw] = useState("Alanturing123.");
+    // const users = [{ email: "alan@turing.com", psw: "Alanturing123." }];
 
     // --- MOCK
 
 
     const onSubmit = async ( payload ) => {
 
-        try {
+        // let [ data, setData ] = useState( {} );
+        // let [ error, setError ] = useState( "" );
 
-            // await axios.post(POST.NEW_USER, payload);
+        // useEffect ( () => {
+
+        //     ( async function () {
+                
+        //         try {
+        
+        //             let { data } = await axios.post(POST.NEW_USER, payload);
+        //             setData( data.token );
+        
+        //         } catch ( error ) { setError( console.log(error) ) }
+    
+        //     } )()
+
             
-            // --- MOCK
+        
+        // }, []);
+
+        // setJwt(data);
+        // localStorage.setItem("auth", jwt);
+        // navigate("/dashboard");
+        // resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
+
+        // try {
+
+            // let { data } = addUser(POST.NEW_USER, payload);
+            // setJwt( data );
+            // localStorage.setItem("auth", jwt);
+            // navigate("/dashboard");
+            // resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
+
+
             
-            const account = users.find( (user) => user.email === email );
-            if (account && account.psw === psw) {
-                localStorage.setItem("auth", true);
-                console.log(JSON.stringify(payload));
+            await axios.post(POST.NEW_USER, payload)
+            .then( response => {
+                // setJwt(response.data.token)
+                localStorage.setItem("auth", response.data.token);
                 navigate("/dashboard");
                 resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
-            } else {
-                resultToast("error", "Aún no tienes una cuenta 😟");
-            }
+            })
+            .catch( error => {
+                console.log(error.response.data.description[0]);
+            });
+            
+            // --- MOCK
+            
+            // const account = users.find( (user) => user.email === email );
+            // if (account && account.psw === psw) {
+                // localStorage.setItem("auth", jwt);
+                // console.log(JSON.stringify(payload));
+                // navigate("/dashboard");
+                // resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
+            // } else {
+            //     resultToast("error", "Aún no tienes una cuenta 😟");
+            // }
 
             // --- MOCK
-        } 
-        catch (error) { 
-            resultToast("error", "Se produjo un problema 😥");
-        }
+        // } 
+        // catch (error) { 
+        //     console.log(error.description);
+        //     resultToast("error", "Se produjo un problema 😥");
+        // }
     };
 
     return (
@@ -104,8 +151,8 @@ export default function SignForm () {
                             <Input type="email" size="md" placeholder="alan@turing.com" 
                             // --- MOCK
 
-                            value={email}
-                            onChange={ (event) => setEmail(event.target.value) }
+                            // value={email}
+                            // onChange={ (event) => setEmail(event.target.value) }
 
                             // --- MOCK
 
@@ -120,8 +167,8 @@ export default function SignForm () {
                                 <Input placeholder="Ingresa una contraseña" type={show ? 'text' : 'password'}
                                 // --- MOCK
 
-                                value={psw}
-                                onChange={ (event) => setPsw(event.target.value) }
+                                // value={psw}
+                                // onChange={ (event) => setPsw(event.target.value) }
 
                                 // --- MOCK
 
@@ -143,7 +190,7 @@ export default function SignForm () {
 
                                 // --- MOCK
 
-                                value={psw}
+                                // value={psw}
 
                                 // --- MOCK
 
