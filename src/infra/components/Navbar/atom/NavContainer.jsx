@@ -13,7 +13,7 @@ export default function NavContainer ( { children } ) {
       w="100%"
       p={6}
       opacity={["0.95", "0.95", "1", "1"]}
-      bg={["#240046", "#240046", "fixed", "fixed"]}
+      bg={"#240046"}
       color="white"
       >
         { children }

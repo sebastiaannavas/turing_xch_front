@@ -18,7 +18,6 @@ export default function Features () {
         gap={8}
         pt={16}
         px={16}
-        pb={20}
         >
             <Feature
             icon={<TradeIcon w={8} h={8} />}

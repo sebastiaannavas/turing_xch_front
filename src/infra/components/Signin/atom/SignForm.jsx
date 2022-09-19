@@ -57,7 +57,7 @@ export default function SignForm () {
         await axios.post(POST.NEW_USER, payload)
         .then( response => {
             localStorage.setItem("auth", response.data.token);
-            navigate("/dashboard");
+            navigate("account");
             resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
         })
         .catch( error => {

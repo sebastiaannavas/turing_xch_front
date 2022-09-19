@@ -8,6 +8,7 @@ const Header = () => {
   	return (
 		<>
 			<Heading
+			// id="market"
 			as="h1"
 			size="xl"
 			fontWeight="bold"
@@ -31,13 +32,15 @@ const Header = () => {
 	);
 }
 
-export default function HeroMarket() {
+export default function Market() {
 
     return (
 		<>
 			<Stack
+			id="market"
 			spacing={8}
 			px={12}
+			py={20}
 			pb={24}
 			>
 				<Header />
