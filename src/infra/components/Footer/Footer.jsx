@@ -13,6 +13,7 @@ const MediaButton = ( { children, href } ) => {
             <Link
             href={href}
             color={"gray.400"}
+            target="_blank"
             _hover={{ color: 'purple.500' }}
             transition={'color 0.5s ease'}
             >

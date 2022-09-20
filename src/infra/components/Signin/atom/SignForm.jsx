@@ -5,7 +5,7 @@ import { schema, ERROR_YUP } from "../../../api/yup";
 
 // hooks
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useToast } from "@chakra-ui/react";
@@ -83,7 +83,7 @@ export default function SignForm () {
 
                     <FormControl isInvalid={errors.email}>
                         <FormLabel> Correo electrónico </FormLabel>
-                            <Input type="email" size="md" placeholder="alan@turing.com" 
+                            <Input type="text" size="md" placeholder="alan@turing.com" 
                             {...register("email")} 
                             />
                         <FormErrorMessage> {errors.email && ERROR_YUP.MSG_EMAIL} </FormErrorMessage>
