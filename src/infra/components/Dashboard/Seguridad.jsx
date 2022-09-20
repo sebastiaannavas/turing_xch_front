@@ -24,7 +24,6 @@ import { FcGoogle } from 'react-icons/fc';
 import { BiMailSend } from 'react-icons/bi';
 
 // hooks
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -48,7 +47,7 @@ function Seguridad(){
     const handleClickOk = () => setShowOk(!showOk);
 
     const { register, handleSubmit, formState:{ errors } } = useForm({
-        resolver: yupResolver(schema.change)
+        resolver: yupResolver(schema.changepsw)
     });
 
     const toast = useToast();

@@ -35,9 +35,14 @@ const schema = {
         email: yup.string().email().required(), 
     }),
 
-    // modificado a partir de aqui 
+    // modificado a partir de aqui
 
-    change: yup.object().shape({
+    changemail: yup.object().shape({
+
+        email: yup.string().email().required(), 
+    }),
+
+    changepsw: yup.object().shape({
     
         psw: yup.string().required().min(8).max(18)
         .matches(/^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/),

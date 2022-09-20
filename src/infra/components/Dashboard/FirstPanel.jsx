@@ -10,11 +10,13 @@ import { Link } from 'react-router-dom';
 
 
 // Esta data se extrae de la base de datos. Estos son mocks
-const personalData = {
+export const personalData = {
     name: 'Alan',
     lastname: 'Turing',
     username: 'alanturing',
-    id: '0123456789'
+    email: 'alan@turing.com',
+    id: 'xx-xx-xx-xx',
+    address: 'xxx-xxx-xxx-xxx',
 }
 
 function FirstPanel(){
