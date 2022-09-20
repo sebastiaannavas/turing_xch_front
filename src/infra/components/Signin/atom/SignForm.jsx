@@ -71,7 +71,7 @@ export default function SignForm () {
             if (account && account.psw === psw) {
                 localStorage.setItem("auth", true);
                 console.log(JSON.stringify(payload));
-                navigate("/dashboard");
+                navigate("/dashboard/miperfil");        // modificacion: antes estaba solo /dashboard y ahora es /dashboard/miperfil
                 resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
             } else {
                 resultToast("error", "Aún no tienes una cuenta 😟");
