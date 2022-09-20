@@ -33,7 +33,17 @@ const schema = {
     recover: yup.object().shape({
 
         email: yup.string().email().required(), 
-    })
+    }),
+
+    // modificado a partir de aqui 
+
+    change: yup.object().shape({
+    
+        psw: yup.string().required().min(8).max(18)
+        .matches(/^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/),
+    
+        okPsw: yup.string().required().label('Confirmar contraseña').oneOf([yup.ref('psw'),null])
+    }),
 
 };
 
