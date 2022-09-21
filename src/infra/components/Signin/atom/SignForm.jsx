@@ -5,7 +5,7 @@ import { schema, ERROR_YUP } from "../../../api/yup";
 
 // hooks
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useToast } from "@chakra-ui/react";
@@ -14,6 +14,7 @@ import { useToast } from "@chakra-ui/react";
 import { Button, FormControl, FormLabel, FormErrorMessage, Input, 
          Stack, InputGroup, InputRightElement, IconButton
 } from '@chakra-ui/react';
+import { Link } from "react-router-dom";
 
 // icons
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -49,39 +50,22 @@ export default function SignForm () {
 
     const navigate = useNavigate();
 
-
-    // --- MOCK
-
-    const [email, setEmail] = useState("alan@turing.com");
-    const [psw, setPsw] = useState("Alanturing123.");
-    const users = [{ email: "alan@turing.com", psw: "Alanturing123." }];
-
-    // --- MOCK
-
+    // const [jwt, setJwt] = useState("");
+    // const [authError, setJwtError] = useState("");
 
     const onSubmit = async ( payload ) => {
 
-        try {
+        await axios.post(POST.NEW_USER, payload)
+        .then( response => {
+            localStorage.setItem("auth", response.data.token);
+            navigate("account");
+            resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
+        })
+        .catch( error => {
+            resultToast("error", `${error.response.data.description[0]} 😥`);
+        });
 
-            // await axios.post(POST.NEW_USER, payload);
-            
-            // --- MOCK
-            
-            const account = users.find( (user) => user.email === email );
-            if (account && account.psw === psw) {
-                localStorage.setItem("auth", true);
-                console.log(JSON.stringify(payload));
-                navigate("/dashboard/miperfil");        // modificacion: antes estaba solo /dashboard y ahora es /dashboard/miperfil
-                resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
-            } else {
-                resultToast("error", "Aún no tienes una cuenta 😟");
-            }
-
-            // --- MOCK
-        } 
-        catch (error) { 
-            resultToast("error", "Se produjo un problema 😥");
-        }
+        // resultToast("error", "Aún no tienes una cuenta 😟");
     };
 
     return (
@@ -93,7 +77,6 @@ export default function SignForm () {
                     <FormControl isInvalid={errors.name}>
                         <FormLabel> Nombre y apellido </FormLabel>
                             <Input type="text" size="md" placeholder="Alan Turing" 
-                            
                             {...register("name")}
                             />
                         <FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
@@ -102,13 +85,6 @@ export default function SignForm () {
                     <FormControl isInvalid={errors.email}>
                         <FormLabel> Correo electrónico </FormLabel>
                             <Input type="email" size="md" placeholder="alan@turing.com" 
-                            // --- MOCK
-
-                            value={email}
-                            onChange={ (event) => setEmail(event.target.value) }
-
-                            // --- MOCK
-
                             {...register("email")} 
                             />
                         <FormErrorMessage> {errors.email && ERROR_YUP.MSG_EMAIL} </FormErrorMessage>
@@ -118,13 +94,6 @@ export default function SignForm () {
                         <FormLabel> Contraseña </FormLabel>
                             <InputGroup size="md">
                                 <Input placeholder="Ingresa una contraseña" type={show ? 'text' : 'password'}
-                                // --- MOCK
-
-                                value={psw}
-                                onChange={ (event) => setPsw(event.target.value) }
-
-                                // --- MOCK
-
                                 {...register("psw")}
                                 />
                                 <InputRightElement>
@@ -140,13 +109,6 @@ export default function SignForm () {
                         <FormLabel> Confirmar contraseña </FormLabel>
                             <InputGroup size="md">
                                 <Input placeholder="Confirma tu contraseña" type={showOk ? 'text' : 'password'}
-
-                                // --- MOCK
-
-                                value={psw}
-
-                                // --- MOCK
-
                                 {...register("okPsw")}
                                 />
                                 <InputRightElement>
@@ -157,7 +119,7 @@ export default function SignForm () {
                             </InputGroup>
                         <FormErrorMessage> {errors.okPsw && ERROR_YUP.MSG_OKPSW} </FormErrorMessage>   
                     </FormControl>
-
+                    <Link to='/login'> ¿Ya tienes una cuenta? </Link>
                     <Stack pt={4}>
                         <Button colorScheme={'yellow'} variant={'solid'} type="submit">
                             Registrarse

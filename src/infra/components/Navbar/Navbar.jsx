@@ -1,3 +1,6 @@
+// routes
+import { Outlet } from "react-router-dom";
+
 // hooks
 import { useState } from "react";
 
@@ -20,6 +23,8 @@ function Navbar () {
 				<MenuToggle toggle={toggle} isOpen={isOpen} />
 				<NavLinks isOpen={isOpen} />
 			</NavContainer>
+			
+			<Outlet />
 		</>
 	);
 }

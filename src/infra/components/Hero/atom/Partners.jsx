@@ -7,21 +7,22 @@ export default function Partners () {
   return (
     <>
         <Flex
-        direction={['column', 'row']}
+        direction={['column', 'column', 'row', 'row']}
         align="center"
         justify={['center', 'space-between']}
-        gap={[8, 0]}
+        gap={[8, 8, 0, 0]}
         wrap="wrap"
         pt={10}
-        px={28} // REVIEW
+        px={28}
         pb={20}
         >
 
         <Box 
         as={motion.div}
         boxSize={["100%", "35%", "25%", "20%"]}
-        opacity="0.5"
-        whileHover={{ scale: 1.1, opacity: 1 }}
+        filter="grayscale(100%)"
+        opacity={"0.5"}
+        whileHover={{ scale: 1.1, opacity: 1, filter: "none" }}
         whileTap={{ scale: 0.9 }}
         transition='0.1s linear'
         >
@@ -33,8 +34,9 @@ export default function Partners () {
         <Box 
         as={motion.div}
         boxSize={["80%", "25%", "15%", "10%"]}
-        opacity="0.5"
-        whileHover={{ scale: 1.1, opacity: 1 }}
+        filter="grayscale(100%)"
+        opacity={"0.5"}
+        whileHover={{ scale: 1.1, opacity: 1, filter: "none" }}
         whileTap={{ scale: 0.9 }}
         transition='0.1s linear'
         >
@@ -46,8 +48,23 @@ export default function Partners () {
         <Box 
         as={motion.div}
         boxSize={["80%", "25%", "15%", "15%"]}
-        opacity="0.5"
-        whileHover={{ scale: 1.1, opacity: 1 }}
+        filter="grayscale(100%)"
+        opacity={"0.5"}
+        whileHover={{ scale: 1.1, opacity: 1, filter: "none" }}
+        whileTap={{ scale: 0.9 }}
+        transition='0.1s linear'
+        >
+            <Link href="https://www.itrock.com.ar/" target={"_blank"}>
+                <Image src="https://dl.dropboxusercontent.com/s/ewqmb5gix2j620i/it-rock.png?dl=0" alt="IT Rock" />
+            </Link>
+        </Box>
+
+        <Box 
+        as={motion.div}
+        boxSize={["80%", "25%", "15%", "15%"]}
+        filter="grayscale(100%)"
+        opacity={"0.5"}
+        whileHover={{ scale: 1.1, opacity: 1, filter: "none" }}
         whileTap={{ scale: 0.9 }}
         transition='0.1s linear'
         >

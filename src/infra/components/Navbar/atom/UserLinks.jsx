@@ -1,6 +1,5 @@
 // routes
 import { Link } from "react-router-dom";
-import { HashLink } from 'react-router-hash-link';
 
 // components
 import { Button, IconButton, Box, Stack, Tooltip } from "@chakra-ui/react";
@@ -26,7 +25,7 @@ const NavGroup = ( { children, isOpen } ) => {
     )
 }
 
-export default function NavLinks ( {isOpen} ) {
+export default function UserLinks ( {isOpen} ) {
 
 	return (
 		<>
@@ -35,32 +34,32 @@ export default function NavLinks ( {isOpen} ) {
 				_hover={{ color: "purple.400" }}
 				transition={'color 0.5s ease'}
 				>
-					<Link to="/" style={{ fontWeight: "bold" }}> Inicio </Link>
+					<Link to="/exchange" style={{ fontWeight: "bold" }}> Exchange </Link>
 				</Box>
 
 				<Box
 				_hover={{ color: "purple.400" }}
 				transition={'color 0.5s ease'}
 				>
-					<HashLink smooth to="/#market" style={{ fontWeight: "bold", textDecoration: "none" }}> Mercado </HashLink>
+					<Link to="/deposits" style={{ fontWeight: "bold" }}> Depósitos </Link>
 				</Box>
 
 				<Box
 				_hover={{ color: "purple.400" }}
 				transition={'color 0.5s ease'}
 				>
-					<HashLink smooth to="/#blog" style={{ fontWeight: "bold", textDecoration: "none" }}> Blog </HashLink>
+					<Link to="/account/dashboard/miperfil" style={{ fontWeight: "bold" }}> Dashboard </Link>
 				</Box>
 
 				<Box
 				_hover={{ color: "purple.400" }}
 				transition={'color 0.5s ease'}
 				>
-					<HashLink smooth to="/#about" style={{ fontWeight: "bold", textDecoration: "none" }}> Nosotros </HashLink>
+					<Link to="/account" style={{ fontWeight: "bold" }}> + </Link>
 				</Box>
 
 				<Stack direction="row" spacing='4'>
-					<Link to="/login">
+					<Link to="/account">
 						<Tooltip label='Iniciar Sesión'>
 							<IconButton 
 							color="purple.400"
@@ -68,10 +67,6 @@ export default function NavLinks ( {isOpen} ) {
 							aria-label='Iniciar sesión' 
 							icon={<PersonOutline />} />
 						</Tooltip>
-					</Link>
-					
-					<Link to="/signin">
-						<Button colorScheme='purple'> Registrarse </Button>
 					</Link>
 				</Stack>
 			</NavGroup>

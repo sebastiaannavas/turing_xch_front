@@ -1,12 +1,21 @@
 // routes
 import { Routes, Route } from "react-router-dom";
 
-// components
-import Landing from "../../infra/components/Landing/Landing";
+// single components
+import NoNavbar from "../../infra/components/NoNavbar/NoNavbar";
 import Signin from "../../infra/components/Signin/Signin";
-import NotFound from "../../infra/components/NotFound/NotFound";
 import Login from "../../infra/components/Login/Login";
 import RecoverPsw from "../../infra/components/RecoverPsw/RecoverPsw";
+// landing components
+import Navbar from "../../infra/components/Navbar/Navbar";
+import Landing from "../../infra/components/Landing/Landing";
+// account components
+import UserNavbar from "../../infra/components/UserNavbar/UserNavbar";
+import Exchange from "../../infra/components/Exchange/Exchange";
+import Deposits from "../../infra/components/Deposits/Deposits";
+// no components
+import NotFound from "../../infra/components/NotFound/NotFound";
+
 // modificado a partir de aqui
 import TeamCards from "../../infra/components/TeamCards/TeamCards";
 import Dashboard from "../../infra/components/Dashboard/Dashboard";
@@ -22,22 +31,30 @@ function App() {
   return (
     <>
       	<Routes>
-			<Route path="/" element={ <Landing /> } />
-			<Route path="/signin" element={ <Signin /> } />
-			<Route path="/login" element={ <Login /> } />
-			<Route path="/recover" element={ <RecoverPsw /> } />
+			<Route element={ <Navbar /> }>
+				<Route path="/" element={ <Landing /> } />
+			</Route>
+			<Route element={ <NoNavbar /> }>
+				<Route path="/signin" element={ <Signin /> } />
+				<Route path="/login" element={ <Login /> } />
+				<Route path="/recover" element={ <RecoverPsw /> } />
+			</Route>
+			<Route path="account" element={ <UserNavbar /> }>
+				<Route index element={ <Exchange /> } />
+				<Route path="deposits" element={ <Deposits /> } />
+				<Route path="dashboard" element={ <Dashboard /> }>
+					<Route path="MiPerfil" element={<MiPerfil />}/>
+					<Route path="Seguridad" element={<Seguridad />}/>
+					<Route path="BalanceDeActivos" element={<BalanceDeActivos />}/>
+					<Route path="Soporte" element={<Soporte />}/>
+				</Route>
+			</Route>
 			<Route path="*" element={ <NotFound /> } />
 			<Route path="/firstpanel" element={<FirstPanel />} />
 
 			{/* modificado a partir de aqui */}
 			
 			<Route path="/TeamCards" element={<TeamCards />} />
-			<Route path="/dashboard" element={ <Dashboard /> }>
-				<Route path="MiPerfil" element={<MiPerfil />}/>
-				<Route path="Seguridad" element={<Seguridad />}/>
-				<Route path="BalanceDeActivos" element={<BalanceDeActivos />}/>
-				<Route path="Soporte" element={<Soporte />}/>
-			</Route>
 			
 		</Routes>
     </>

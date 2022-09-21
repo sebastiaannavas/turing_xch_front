@@ -44,6 +44,7 @@ function TeamCards(){
     return(
         <>
             <Flex
+                id="about"
                 flex={1}
                 minH={'800px'}
                 bgGradient={[ 'linear(to-b, #6B093B, #3B082B)' ]}
