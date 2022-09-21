@@ -14,6 +14,7 @@ import { useToast } from "@chakra-ui/react";
 import { Button, FormControl, FormLabel, FormErrorMessage, Input, 
          Stack, InputGroup, InputRightElement, IconButton
 } from '@chakra-ui/react';
+import { Link } from "react-router-dom";
 
 // icons
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -118,7 +119,7 @@ export default function SignForm () {
                             </InputGroup>
                         <FormErrorMessage> {errors.okPsw && ERROR_YUP.MSG_OKPSW} </FormErrorMessage>   
                     </FormControl>
-
+                    <Link to='/login'> ¿Ya tienes una cuenta? </Link>
                     <Stack pt={4}>
                         <Button colorScheme={'yellow'} variant={'solid'} type="submit">
                             Registrarse

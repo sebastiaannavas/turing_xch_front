@@ -48,6 +48,13 @@ export default function UserLinks ( {isOpen} ) {
 				_hover={{ color: "purple.400" }}
 				transition={'color 0.5s ease'}
 				>
+					<Link to="/account/dashboard/miperfil" style={{ fontWeight: "bold" }}> Dashboard </Link>
+				</Box>
+
+				<Box
+				_hover={{ color: "purple.400" }}
+				transition={'color 0.5s ease'}
+				>
 					<Link to="/account" style={{ fontWeight: "bold" }}> + </Link>
 				</Box>
 

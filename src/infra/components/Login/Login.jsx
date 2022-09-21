@@ -11,7 +11,7 @@ export default function Login () {
         <>
             <Stack 
             minH={'100vh'} 
-            direction={{ base: 'column', md: 'row' }}
+            direction={{ base: 'column', md: 'row-reverse' }}
             >
                 <Flex 
                     flex={1}
