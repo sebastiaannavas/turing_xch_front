@@ -8,6 +8,7 @@ import Partners from "../Hero/atom/Partners";
 import Features from "../Feat/Features";
 import Market from "../Market/Market";
 import TeamCards from "../TeamCards/TeamCards";
+import ContactUs from "../ContactUs/ContactUs";
 import Footer from "../Footer/Footer";
 
 // icons
@@ -48,6 +49,7 @@ export default function Landing() {
       <Features />
       <Market />
       <TeamCards />
+      <ContactUs />
       <Footer />
 
       <Box

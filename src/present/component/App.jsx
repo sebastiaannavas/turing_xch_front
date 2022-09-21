@@ -24,6 +24,7 @@ import Seguridad from "../../infra/components/Dashboard/Seguridad";
 import BalanceDeActivos from "../../infra/components/Dashboard/BalanceDeActivos/BalanceDeActivos";
 import Soporte from "../../infra/components/Dashboard/Soporte";
 import FirstPanel from "../../infra/components/Dashboard/FirstPanel";
+import ContactUs from "../../infra/components/ContactUs/ContactUs";
 
 
 function App() {
@@ -55,7 +56,7 @@ function App() {
 			{/* modificado a partir de aqui */}
 			
 			<Route path="/TeamCards" element={<TeamCards />} />
-			
+			<Route path="/ContactUs" element={<ContactUs />} />
 		</Routes>
     </>
   );
