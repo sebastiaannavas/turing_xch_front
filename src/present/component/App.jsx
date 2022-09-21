@@ -25,6 +25,7 @@ import BalanceDeActivos from "../../infra/components/Dashboard/BalanceDeActivos/
 import Soporte from "../../infra/components/Dashboard/Soporte";
 import FirstPanel from "../../infra/components/Dashboard/FirstPanel";
 import ContactUs from "../../infra/components/ContactUs/ContactUs";
+import Guides from "../../infra/components/Guides/Guides";
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
 			
 			<Route path="/TeamCards" element={<TeamCards />} />
 			<Route path="/ContactUs" element={<ContactUs />} />
+			<Route path="/Guides" element={<Guides />} />
 		</Routes>
     </>
   );

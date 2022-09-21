@@ -7,6 +7,7 @@ import Hero from "../Hero/Hero";
 import Partners from "../Hero/atom/Partners";
 import Features from "../Feat/Features";
 import Market from "../Market/Market";
+import Guides from "../Guides/Guides";
 import TeamCards from "../TeamCards/TeamCards";
 import ContactUs from "../ContactUs/ContactUs";
 import Footer from "../Footer/Footer";
@@ -48,6 +49,7 @@ export default function Landing() {
 
       <Features />
       <Market />
+      <Guides />
       <TeamCards />
       <ContactUs />
       <Footer />
