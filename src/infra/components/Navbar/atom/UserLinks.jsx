@@ -145,7 +145,7 @@ export default function UserLinks ( {isOpen} ) {
 									as={"button"}
 									// color={"red.300"}
 									fontWeight="600"
-									// onClick={logout}
+									onClick={logout}
 									> Cerrar sesión </MenuItem>
 								</Link>
 						</MenuList>

@@ -13,12 +13,10 @@ import UserLinks from "../Navbar/atom/UserLinks";
 
 export default function UserNavbar () {
 
-    const logout = () => localStorage.removeItem("auth");
-
-    // if (!localStorage.getItem("auth")) {
+    if (!localStorage.getItem("auth")) {
         
-    //     return <Navigate replace to="/signin" />;
-    // } 
+        return <Navigate replace to="/login" />;
+    } 
 
     const [isOpen, setIsOpen] = useState(false);
   
@@ -33,16 +31,6 @@ export default function UserNavbar () {
 			</NavContainer>
             
             <Outlet />
-
-            {/* <Link to="/">
-                <Button
-                colorScheme='red'
-                p={6}
-                onClick={logout}
-                >
-                    Cerrar sesión
-                </Button>
-            </Link> */}
         </>
     );
 }

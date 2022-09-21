@@ -27,7 +27,7 @@ const schema = {
         email: yup.string().email().required(), 
 
         psw: yup.string().required().min(8).max(18)
-        .matches(/^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/),
+        .matches(/^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/)
     }),
 
     recover: yup.object().shape({
