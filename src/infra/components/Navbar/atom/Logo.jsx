@@ -1,14 +1,15 @@
-import { Routes, Route, Link } from "react-router-dom";
-
 // components
-import { Box, Heading } from "@chakra-ui/react"
+import { Box, Heading, Link } from "@chakra-ui/react"
 import { TuringIcon } from "../../../../app/common/Icons/TuringIcon"
 
 export default function Logo () {
 
   return (
     <>
-      <Link to="/" style={{ display:"flex", gap: 6 }}> 
+      <Link 
+      href="https://github.com/sebastiaannavas/turing_xch_front" 
+      target={"_blank"} 
+      style={{ display:"flex", gap: 6, textDecoration: "none" }}> 
         <TuringIcon boxSize={12} />
         <Box padding={2}>
           <Heading size='md' p={0.5} color="white" > Turing Exchange </Heading>

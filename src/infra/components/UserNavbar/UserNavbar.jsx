@@ -33,16 +33,6 @@ export default function UserNavbar () {
 			</NavContainer>
             
             <Outlet />
-
-            {/* <Link to="/">
-                <Button
-                colorScheme='red'
-                p={6}
-                onClick={logout}
-                >
-                    Cerrar sesión
-                </Button>
-            </Link> */}
         </>
     );
 }

@@ -15,6 +15,7 @@ const MediaButton = ( { children, href } ) => {
             href={href}
             color={"gray.400"}
             _hover={{ color: '#11001c' }}
+            target="_blank"
             transition={'color 0.5s ease'}
             >
                 <IconContext.Provider 
