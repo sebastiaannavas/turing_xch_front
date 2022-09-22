@@ -128,6 +128,17 @@ export default function LoginForm () {
                         <Button colorScheme={'yellow'} variant={'solid'} type="submit">
                             Ingresar
                         </Button>
+                        <Box
+                        align={'center'}
+                        justify={'center'}
+                        fontWeight="600"
+                        pt={2}
+                        color={"gray.400"}
+                        _hover={{ color: "gray.600" }}
+				        transition={'color 0.5s ease'}
+                        >
+                            <Link to='/signin'> ¿Aún no tienes una cuenta? Regístrate </Link>
+                        </Box>
                     </Stack>
 
                 </Stack>

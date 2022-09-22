@@ -12,7 +12,7 @@ import { useToast } from "@chakra-ui/react";
 
 // components
 import { Button, FormControl, FormLabel, FormErrorMessage, Input, 
-         Stack, InputGroup, InputRightElement, IconButton
+         Stack, InputGroup, InputRightElement, IconButton, Box
 } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 
@@ -74,14 +74,6 @@ export default function SignForm () {
                 <Stack
                 gap={4}
                 >
-                    <FormControl isInvalid={errors.name}>
-                        <FormLabel> Nombre y apellido </FormLabel>
-                            <Input type="text" size="md" placeholder="Alan Turing" 
-                            {...register("name")}
-                            />
-                        <FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
-                    </FormControl>
-
                     <FormControl isInvalid={errors.email}>
                         <FormLabel> Correo electrónico </FormLabel>
                             <Input type="email" size="md" placeholder="alan@turing.com" 
@@ -119,12 +111,24 @@ export default function SignForm () {
                             </InputGroup>
                         <FormErrorMessage> {errors.okPsw && ERROR_YUP.MSG_OKPSW} </FormErrorMessage>   
                     </FormControl>
-                    <Link to='/login'> ¿Ya tienes una cuenta? </Link>
-                    <Stack pt={4}>
+                    
+                    <Stack pt={1}>
                         <Button colorScheme={'yellow'} variant={'solid'} type="submit">
                             Registrarse
                         </Button>
                     </Stack>
+
+                    <Box
+                    align={'center'}
+                    justify={'center'}
+                    fontWeight="600"
+                    pt={2}
+                    color={"gray.400"}
+                    _hover={{ color: "gray.600" }}
+                    transition={'color 0.5s ease'}
+                    >
+                        <Link to='/login'> ¿Ya tienes una cuenta? Inicia sesión </Link>
+                    </Box>
 
                 </Stack>
             </form>

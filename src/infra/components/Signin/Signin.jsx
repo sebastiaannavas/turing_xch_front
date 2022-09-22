@@ -42,7 +42,7 @@ export default function Signin () {
                 justify={'center'}
                 >
                     <Stack 
-                    pt={[0, 0, 12, 6]}
+                    pt={[0, 0, 12, 0]}
                     maxW={'md'}
                     w={"full"}
                     >

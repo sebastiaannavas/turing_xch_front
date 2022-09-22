@@ -49,7 +49,7 @@ export default function Landing() {
 
       <Features />
       <Market />
-      <Guides />
+      {/* <Guides /> */}
       <TeamCards />
       <ContactUs />
       <Footer />

@@ -7,27 +7,31 @@ const Header = () => {
 
   	return (
 		<>
-			<Heading
-			// id="market"
-			as="h1"
-			size="xl"
-			fontWeight="bold"
-			textAlign={"center"}
-			color="gray.800"
+			<Stack
+			spacing={12}
 			>
-				Cryptos del Momento
-			</Heading>
-			<Text 
-			color={'gray.800'} 
-			align="center"
-			> 
-				<Highlight
-				query='Turing Exchange' 
-				styles={{ px: '1', py: '1', bg: 'purple.200', fontWeight: 'bold' }}
+				<Heading
+				as="h1"
+				size="xl"
+				fontWeight="extrabold"
+				textAlign={"center"}
+				bgGradient="linear(to-l, #f72585, #4361ee)"
+  				bgClip="text"
 				>
-					¡Consulta los precios de las criptomonedas que Turing Exchange ofrece para ti! 
-				</Highlight>
-			</Text>
+					Cryptos del Momento
+				</Heading>
+				<Text 
+				color={'gray.800'} 
+				align="center"
+				> 
+					<Highlight
+					query='Turing Exchange' 
+					styles={{ px: '1', py: '1', bg: 'yellow.300', fontWeight: 'bold' }}
+					>
+						¡Consulta los precios de las criptomonedas que Turing Exchange ofrece para ti! 
+					</Highlight>
+				</Text>
+			</Stack>
 		</>
 	);
 }
@@ -38,10 +42,11 @@ export default function Market() {
 		<>
 			<Stack
 			id="market"
-			spacing={8}
+			spacing={16}
 			px={12}
 			py={20}
 			pb={24}
+			bg={"gray.100"}
 			>
 				<Header />
 				<Box p={4}>

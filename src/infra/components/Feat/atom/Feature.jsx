@@ -20,8 +20,8 @@ export default function Feature ( { icon, title, text } ) {
             mb={1}>
                 { icon }
             </Flex>
-            <Text fontWeight={600} align="center"> { title } </Text>
-            <Text color={'gray.600'} align="center"> { text } </Text>
+            <Text fontWeight={"bold"} align="center"> { title } </Text>
+            <Text color={'gray.800'} align="center"> { text } </Text>
         </Stack>
       </>
     );

@@ -57,22 +57,22 @@ function FirstPanel(){
                 display={'flex'}
                 alignItems={'space-between'}
                 gap={4}>
-                <Link to='/account/Dashboard/MiPerfil'>
+                <Link to=''>
                     <Button variant={'ghost'} width={'full'} mt={'3%'}>
                         Mi perfil
                     </Button>
                 </Link>
-                <Link to='/account/Dashboard/Seguridad'>
+                <Link to='security'>
                     <Button variant={'ghost'} width={'full'} mt={'3%'}>
                         Seguridad
                     </Button>
                 </Link>
-                <Link to='/account/Dashboard/BalanceDeActivos'>
+                <Link to='balance'>
                     <Button variant={'ghost'} width={'full'} mt={'3%'}>
                         Balance de activos
                     </Button>
                 </Link>
-                <Link to='/account/Dashboard/Soporte'>
+                <Link to='support'>
                     <Button variant={'ghost'} width={'full'} mt={'3%'}>
                         Soporte
                     </Button>

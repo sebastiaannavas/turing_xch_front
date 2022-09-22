@@ -15,10 +15,10 @@ export default function UserNavbar () {
 
     const logout = () => localStorage.removeItem("auth");
 
-    if (!localStorage.getItem("auth")) {
+    // if (!localStorage.getItem("auth")) {
         
-        return <Navigate replace to="/signin" />;
-    } 
+    //     return <Navigate replace to="/signin" />;
+    // } 
 
     const [isOpen, setIsOpen] = useState(false);
   

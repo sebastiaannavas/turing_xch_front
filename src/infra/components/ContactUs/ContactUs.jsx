@@ -1,13 +1,5 @@
-import {
-    Box,
-    Container,
-    Flex,
-    Heading,
-    Text,
-} from "@chakra-ui/react";
-
-import { TuringIcon } from "../../../app/common/Icons/TuringIcon";
-
+// components
+import { Flex, Heading, Text, Stack } from "@chakra-ui/react";
 import ContactUsForm from "./atom/ContactUsForm";
 
 function ContactUs(){
@@ -18,8 +10,13 @@ function ContactUs(){
                 direction={{ base: 'column', md: 'row'}}
                 alignItems={'center'}
                 justifyContent={'center'}
-                gap={10}>
+                gap={10}
+                px={16}
+                pt={10}
+                pb={[20, 20, 10, 10]}
+                >
                 <Flex
+                    flex={1}
                     py={10}
                     px={5}
                     direction={'column'}
@@ -30,24 +27,33 @@ function ContactUs(){
                         textAlign={'center'}
                         alignItems={'center'}
                         gap={5}>
-                        <Heading textTransform={'uppercase'}>Contacto</Heading>
+                        <Heading 
+                        textTransform={'uppercase'}
+                        bgGradient="linear(to-l, #f72585, #4361ee)"
+  				        bgClip="text"
+                        > 
+                            ¿Tienes alguna duda?
+                        </Heading>
                         <Text
-                            textAlign={'center'}
-                            color={'gray.700'}
-                            fontSize={'80%'}>
-                            Para enviarnos un mensaje, llena el siguiente formulario
+                        textAlign={'center'}
+                        color={'gray.800'}
+                        fontWeight="600"
+                        fontSize={'sm'}>
+                            Para contactarnos, envía un mensaje en el siguiente formulario
                         </Text>
-                        <TuringIcon boxSize={'70%'}/>
                     </Flex>
                 </Flex>
                 <Flex
-                    bg={'gray.800'}
-                    my={10}
-                    mx={5}
-                    py={10}
-                    px={5}
-                    rounded={10}>
-                    <ContactUsForm />
+                flex={1}
+                bg={'#11001c'}
+                py={6}
+                px={6}
+                rounded={10}>
+                    <Stack 
+                    w={"full"}
+                    >
+                        <ContactUsForm />
+                    </Stack>
                 </Flex>
             </Flex>
         </>

@@ -9,16 +9,14 @@ export default function TopCards() {
     return (
 		<>
 			<Box 
-            // w={"25%"}
-            // h={"25%"}
             rounded="lg"
             shadow="lg"
-            bg="purple.800"
+            bg="#11001c"
             p={6}
             overflow='hidden'
-
             display='flex'
             flexDirection={"column"}
+            fontSize={["sm", "md", "md", "md"]}
             gap={4}
             >
                 <Flex justify="space-between" align="center">
@@ -32,15 +30,12 @@ export default function TopCards() {
                 </Flex>
                 <Flex justify="space-between" align="center">
                     <Box>
-                        <Text fontSize='lg' p={0.5} color="white" fontWeight={"bold"} > USD 62,548.22 </Text>
+                        <Text p={0.5} color="white" fontWeight={"bold"} > USD 62,548.22 </Text>
                     </Box> 
                     <Box>
                         <Text p={0.5} color="green.300" fontWeight={"bold"} > +2.05% </Text>
                     </Box> 
                 </Flex>
-                <Box>
-                    <Text p={0.5} color="purple.400" > Último mes </Text>
-                </Box>
             </Box>
 		</>
     )

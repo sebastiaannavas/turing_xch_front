@@ -53,14 +53,9 @@ const schema = {
 
     contact: yup.object().shape({
 
-        name: yup.string().required().matches(/^\s?[a-zA-Z]+\s[a-zA-Z]+\s?$/), 
-    
         email: yup.string().email().required(), 
-
         mensaje: yup.string().required().max(70),
-   
     }),
-
 };
 
 export { schema, ERROR_YUP };

@@ -1,5 +1,5 @@
 // routes
-import { Navigate,Outlet } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
 
 // components
 import { Flex } from "@chakra-ui/react"
@@ -7,11 +7,6 @@ import { Flex } from "@chakra-ui/react"
 import FirstPanel from "./FirstPanel";
 
 export default function Dashboard () {
-
-    if (!localStorage.getItem("auth")) {
-        
-        return <Navigate replace to="/signin" />;
-    } 
 
     return (
         <>

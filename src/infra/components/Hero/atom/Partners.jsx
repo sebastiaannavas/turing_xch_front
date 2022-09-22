@@ -7,6 +7,7 @@ export default function Partners () {
   return (
     <>
         <Flex
+        id="partners"
         direction={['column', 'column', 'row', 'row']}
         align="center"
         justify={['center', 'space-between']}
