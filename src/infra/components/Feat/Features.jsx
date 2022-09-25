@@ -1,5 +1,5 @@
 // components
-import { Flex, Box, SimpleGrid } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import Feature from "./atom/Feature";
 
 // icons

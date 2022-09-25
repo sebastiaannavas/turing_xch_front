@@ -39,10 +39,10 @@ function FirstPanel(){
                 direction={'column'}
                 alignItems={'center'}>
                 <Avatar 
-                    size={'250px'}
+                    size={'180px'}
                     name={name}
-                    variant='pixel'
-                    colors={["#260D33", "#003F69", "#106B87", "#157A8C", "#000000"]}
+                    variant='bauhaus'
+					colors={["#9d4edd", "#613dc1", "#f72585", "#ffce1f", "#ff6d00"]}
                     />
                 <Heading>
                     {name}{' '}{lastname}

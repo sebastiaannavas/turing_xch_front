@@ -16,7 +16,7 @@ export default function Exchange() {
 	return (
 		<>
 			<Stack
-			// set real background of app
+			// TODO: set real background of app
 			bg={"#16002A"}
 			minH="85.4vh"
 			>

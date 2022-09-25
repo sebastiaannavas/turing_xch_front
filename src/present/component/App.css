@@ -1,18 +1,20 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-} */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
 
-.logo {
-	height: 8em;
-	padding: 1.5em;
-	will-change: filter;
+/* Track */
+::-webkit-scrollbar-track {
+  background: #FAF5FF; 
 }
-/* .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #9F7AEA; 
+  border-radius: 20px;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-} */
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #6B46C1; 
+}

@@ -59,13 +59,11 @@ export default function SignForm () {
         .then( response => {
             localStorage.setItem("auth", response.data.token);
             navigate("/account");
-            resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
+            resultToast("success", `${response.data.msg} 🎉`);
         })
         .catch( error => {
             resultToast("error", `${error.response.data.description[0]} 😥`);
         });
-
-        // resultToast("error", "Aún no tienes una cuenta 😟");
     };
 
     return (
@@ -74,6 +72,14 @@ export default function SignForm () {
                 <Stack
                 gap={4}
                 >
+                    <FormControl isInvalid={errors.name}>
+                        <FormLabel> Nombre y apellido </FormLabel>
+                            <Input type="text" size="md" placeholder="Alan Turing" 
+                            {...register("name")}
+                            />
+                        <FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
+                    </FormControl>
+
                     <FormControl isInvalid={errors.email}>
                         <FormLabel> Correo electrónico </FormLabel>
                             <Input type="text" size="md" placeholder="alan@turing.com" 

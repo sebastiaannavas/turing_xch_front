@@ -13,12 +13,10 @@ import UserLinks from "../Navbar/atom/UserLinks";
 
 export default function UserNavbar () {
 
-    const logout = () => localStorage.removeItem("auth");
-
     // if (!localStorage.getItem("auth")) {
         
     //     return <Navigate replace to="/signin" />;
-    // } 
+    // }
 
     const [isOpen, setIsOpen] = useState(false);
   

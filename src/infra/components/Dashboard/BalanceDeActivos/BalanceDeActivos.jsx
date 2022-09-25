@@ -249,15 +249,8 @@ function BalanceDeActivos(){
             bg='gray.700'
             direction={'column'}
             p={10}>
-            <Heading
-                color={'yellow.200'}
-                textAlign={'left'}
-                fontWeight={'bold'}
-                fontSize={'120%'}>
-                Balance de Activos
-            </Heading>
                 <Tabs isFitted variant='enclosed'>
-                    <TabList mb='1em' bg={'white'} rounded={10} overflowX={'scroll'}>
+                    <TabList mb='1em' bg={'white'} rounded={10} >
                         <Tab>USDT</Tab>
                         <Tab>XRP</Tab>
                         <Tab>LTC</Tab>
@@ -265,7 +258,31 @@ function BalanceDeActivos(){
                         <Tab>DASH</Tab>
                         <Tab>ZCASH</Tab>
                     </TabList>
-                    <Flex maxH={'600px'} overflowY={'scroll'}>
+                    <Flex 
+                    maxH={'600px'} 
+                    overflowY={'auto'}
+                    sx={
+                        { 
+                            '&::-webkit-scrollbar': {
+                                width: "5px"
+                            },
+                              
+                            '&::-webkit-scrollbar-track': {
+                                bg: "purple.50",
+                                borderRadius: "20px"
+                            },
+                               
+                            '&::-webkit-scrollbar-thumb': {
+                                bg: "purple.400", 
+                                borderRadius: "20px"
+                            },
+                              
+                            '&::-webkit-scrollbar-thumb:hover': {
+                                bg: "purple.600"
+                            }
+                        }
+                    }
+                    >
                         <TabPanels>
                             <TabPanel>
                                 <TableHead />

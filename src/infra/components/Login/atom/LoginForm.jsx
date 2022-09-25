@@ -54,7 +54,7 @@ export default function LoginForm () {
             resultToast("success", `${response.data.msg} 🎉`);
         })
         .catch( error => {
-            resultToast("error", `${error.response.data.error} 😥`);
+            resultToast("error", `${error.response.data.error} 😟`);
         });
         
     };

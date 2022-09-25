@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 
 // components
-import { Box, Stack, Avatar,
+import { Box, Stack, Badge,
 
 	Popover,
 	PopoverTrigger,
@@ -20,6 +20,7 @@ import { Box, Stack, Avatar,
 	MenuDivider,
 
 } from "@chakra-ui/react";
+import Avatar from 'boring-avatars';
 
 // icons
 import { Info } from "@mui/icons-material";
@@ -62,7 +63,12 @@ export default function UserLinks ( {isOpen} ) {
 				_hover={{ color: "purple.400" }}
 				transition={'color 0.5s ease'}
 				>
-					<Link to="prices" style={{ fontWeight: "bold" }}> Mercado </Link>
+					<Link to="prices" style={{ fontWeight: "bold" }}> 
+						Mercado 
+						<Badge ml={2} colorScheme="yellow">
+							Beta
+						</Badge>
+					</Link>
 				</Box>
 
 				<Box
@@ -111,8 +117,10 @@ export default function UserLinks ( {isOpen} ) {
 						as={"button"} 
 						>
 							<Avatar
-							bg='gray.400'
-							// src='https://bit.ly/kent-c-dodds'
+							name="Alan"
+							size={"50px"}
+							variant='bauhaus'
+							colors={["#9d4edd", "#613dc1", "#f72585", "#ffce1f", "#ff6d00"]}
 							/>
 						</MenuButton>
 						<MenuList 
@@ -121,21 +129,21 @@ export default function UserLinks ( {isOpen} ) {
 						borderColor={"purple.800"}
 						>
 							<MenuGroup title='Cuenta'>
-								<Link to="deposits">
+								<Link to="dashboard">
 									<MenuItem
 									// _hover={{ bg: 'purple.400' }}
 									> Mi perfil </MenuItem>
 								</Link>
-								<Link to="deposits">
-									<MenuItem>Wallet</MenuItem>
+								<Link to="dashboard/balance">
+									<MenuItem> Wallet </MenuItem>
 								</Link>
 							</MenuGroup>
 							<MenuDivider />
 							<MenuGroup title='Configuración'>
-								<Link to="deposits">
+								<Link to="dashboard/security">
 									<MenuItem> Seguridad </MenuItem>
 								</Link>
-								<Link to="deposits">
+								<Link to="dashboard/support">
 									<MenuItem> Soporte </MenuItem>
 								</Link>
 							</MenuGroup>

@@ -1,3 +1,6 @@
+// scroll bar style
+import "./App.css";
+
 // routes
 import { Routes, Route } from "react-router-dom";
 
@@ -6,12 +9,14 @@ import NoNavbar from "../../infra/components/NoNavbar/NoNavbar";
 import Signin from "../../infra/components/Signin/Signin";
 import Login from "../../infra/components/Login/Login";
 import RecoverPsw from "../../infra/components/RecoverPsw/RecoverPsw";
+import EmailVerify from "../../infra/components/EmailVerify/EmailVerify";
 // landing components
 import Navbar from "../../infra/components/Navbar/Navbar";
 import Landing from "../../infra/components/Landing/Landing";
 // account components
 import UserNavbar from "../../infra/components/UserNavbar/UserNavbar";
 import Exchange from "../../infra/components/Exchange/Exchange";
+import Prices from "../../infra/components/Prices/Prices";
 import Deposits from "../../infra/components/Deposits/Deposits";
 // dashboard components
 import Dashboard from "../../infra/components/Dashboard/Dashboard";
@@ -35,9 +40,11 @@ function App() {
 				<Route path="/signin" element={ <Signin /> } />
 				<Route path="/login" element={ <Login /> } />
 				<Route path="/recover" element={ <RecoverPsw /> } />
+				<Route path="/verification" element={ <EmailVerify /> } />
 			</Route>
 			<Route path="account" element={ <UserNavbar /> }>
 				<Route index element={ <Exchange /> } />
+				<Route path="prices" element={ <Prices /> } />
 				<Route path="deposits" element={ <Deposits /> } />
 				<Route path="dashboard" element={ <Dashboard /> }>
 					<Route index element={<MiPerfil />}/>
