@@ -22,6 +22,7 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { FcGoogle } from 'react-icons/fc';
 import { BiMailSend } from 'react-icons/bi';
+import { MdAlternateEmail } from 'react-icons/md'
 
 // hooks
 import { useState } from "react";
@@ -110,8 +111,25 @@ function Seguridad(){
                     textTransform={'uppercase'}
                     color={'white'}>
                     <Flex gap={2} alignItems={'center'}>
-                        <BiMailSend size={20} />
+                        <MdAlternateEmail size={20} />
                         <Text>Email Authentication</Text>
+                    </Flex>
+                </chakra.h3>
+                <Switch/>            
+            </Flex>
+            <Flex
+                direction={{ base: 'column', md: 'row' }}
+                justifyContent={'space-between'}
+                mb={'5%'}>
+                <chakra.h3
+                    fontFamily={'Work Sans'}
+                    fontWeight={'bold'}
+                    fontSize={'75%'}
+                    textTransform={'uppercase'}
+                    color={'white'}>
+                    <Flex gap={2} alignItems={'center'}>
+                        <BiMailSend size={20} />
+                        <Text>SMS Authentication</Text>
                     </Flex>
                 </chakra.h3>
                 <Switch/>            
