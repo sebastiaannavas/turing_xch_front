@@ -8,6 +8,7 @@ const POST = {
     // LOG_USER: "http://localhost:8888/login"
     NEW_USER: "https://resplendent-profiterole-d15e2e.netlify.app/postRegister",
     LOG_USER: "https://resplendent-profiterole-d15e2e.netlify.app/login",
+    DEPOSIT: "https://resplendent-profiterole-d15e2e.netlify.app/postPay"
 }
 
 export { GET, POST };

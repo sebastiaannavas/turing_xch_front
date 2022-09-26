@@ -261,27 +261,6 @@ function BalanceDeActivos(){
                     <Flex 
                     maxH={'600px'} 
                     overflowY={'auto'}
-                    sx={
-                        { 
-                            '&::-webkit-scrollbar': {
-                                width: "5px"
-                            },
-                              
-                            '&::-webkit-scrollbar-track': {
-                                bg: "purple.50",
-                                borderRadius: "20px"
-                            },
-                               
-                            '&::-webkit-scrollbar-thumb': {
-                                bg: "purple.400", 
-                                borderRadius: "20px"
-                            },
-                              
-                            '&::-webkit-scrollbar-thumb:hover': {
-                                bg: "purple.600"
-                            }
-                        }
-                    }
                     >
                         <TabPanels>
                             <TabPanel>

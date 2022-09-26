@@ -55,12 +55,6 @@ export default function TeamCards(){
                     <Heading textAlign={'center'} pb={8}>
                         Conoce más sobre nuestro equipo
                     </Heading>
-                    {/* <Text pt={14} px={32} color={'white'} textAlign="justify">
-                        Somos una startup enfocado en el área de transacciones con criptomonedas.
-                        Por medio de nuestra plataforma puedes comprar y tradear las criptomonedas top del momento,
-                        además de enviar y recibir pagos, consultar tus movimientos y el balance de tus activos. 
-                        Accede a información actualizada de las criptos y elige cuándo mostrar tus datos personales. 
-                    </Text> */}
                 </Box>
                 <SimpleGrid
                     columns={[1, 1, 2, 4]}

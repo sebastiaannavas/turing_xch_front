@@ -6,7 +6,11 @@ const ERROR_YUP = {
     MSG_EMAIL: "Ingresa una dirección de correo válida.",
     MSG_PSW: "Incluye al menos una mayúscula, un número y un carácter especial.",
     MSG_OKPSW: "Las contraseñas deben coincidir.",
-    MSG_MENSAJE: "La longitud máxima de caracteres es de 70"
+    MSG_MENSAJE: "La longitud máxima de caracteres es de 70.",
+    MSG_DESTINATION: "Ingresa una dirección de correo válida.",
+    MSG_AMOUNT: "El monto debe ser un número mayor a cero.",
+    MSG_MONEY: "Seleccione una moneda válida.",
+    MSG_NOTE: "La descripción no debe excederse de 50 caracteres."
 }
 
 const schema = {
@@ -54,6 +58,14 @@ const schema = {
         email: yup.string().email().required(), 
         mensaje: yup.string().required().max(70),
     }),
+
+    deposits: yup.object().shape({
+
+        destination: yup.string().email().required(),
+        amount: yup.number().moreThan(0).required(),
+        money: yup.string().required().min(3).max(4),
+        note: yup.string().min(2).max(50)
+    })
 };
 
 export { schema, ERROR_YUP };

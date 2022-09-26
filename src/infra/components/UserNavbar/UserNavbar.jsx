@@ -13,10 +13,10 @@ import UserLinks from "../Navbar/atom/UserLinks";
 
 export default function UserNavbar () {
 
-    // if (!localStorage.getItem("auth")) {
+    if (!localStorage.getItem("auth")) {
         
-    //     return <Navigate replace to="/signin" />;
-    // }
+        return <Navigate replace to="/signin" />;
+    }
 
     const [isOpen, setIsOpen] = useState(false);
   

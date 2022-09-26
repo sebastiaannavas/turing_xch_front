@@ -4,33 +4,58 @@ import { POST } from "../../../api/endpoints";
 import { schema, ERROR_YUP } from "../../../api/yup";
 
 // hooks
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useToast } from "@chakra-ui/react";
 
 // components
 import { Heading, Flex, Stack, Tabs, TabList, TabPanels, Tab, TabPanel, FormControl, FormLabel, FormErrorMessage, Input, 
-		 Select, Textarea, Button, Text
+		 Select, Textarea, Button, Text, Radio
 } from "@chakra-ui/react";
 
 
 export default function PayForm () {
 
 	const { register, handleSubmit, formState:{ errors } } = useForm({
-        resolver: yupResolver(schema.signin)
+        resolver: yupResolver(schema.deposits)
     });
+
+	// const [token, setToken] = useState("");
+
+	const toast = useToast();
+
+    const resultToast = ( status, title ) => {
+
+        return toast({
+            title: title,
+            status: status,
+            duration: 5000,
+            isClosable: true,
+        });
+    };
 
 	const onSubmit = async ( payload ) => {
 
-        // await axios.post(POST.NEW_USER, payload)
-        // .then( response => {
-        //     localStorage.setItem("auth", response.data.token);
-        //     navigate("/account");
-        //     resultToast("success", `${response.data.msg} 🎉`);
-        // })
-        // .catch( error => {
-        //     resultToast("error", `${error.response.data.description[0]} 😥`);
-        // });
+		console.log(JSON.stringify(payload));
+
+		// setToken(localStorage.getItem("auth"));
+		// const token = localStorage.getItem("auth");
+
+		const config = {
+			headers: { Authorization: `Bearer ${localStorage.getItem("auth")}` }
+		};
+
+        // await axios.get("https://resplendent-profiterole-d15e2e.netlify.app/getCheckJwt", config)
+        await axios.post(POST.DEPOSIT, payload, config)
+        .then( response => {
+			console.log(response);
+            resultToast("success", `${response.data.msg} 🎉`);
+        })
+        .catch( error => {
+			console.log(error);
+            resultToast("error", `${error.response.data.error} 😥`);
+        });
     };
 
     return (
@@ -45,44 +70,52 @@ export default function PayForm () {
 			rounded="lg"
 			borderWidth={"1px"}
 			borderColor={"purple.900"}
+			overflowY="auto"
 			>
 				<form onSubmit={handleSubmit(onSubmit)}>
 
 					<Heading size={"xs"} color="white" pb={4}> Selecciona la cuenta destino </Heading>
 					<Tabs variant='unstyled' bg={"#1F0D3A"} rounded="lg">
-						<FormControl isInvalid={errors.name}>
 
 							<TabList>
-							<FormLabel>
-								<Tab _selected={{ color: 'white', bg: 'blue.500', rounded: 'lg' }}> Email </Tab>
-							</FormLabel>
-							<FormLabel>
-								<Tab _selected={{ color: 'white', bg: 'green.400', rounded: 'lg' }}> ID </Tab>
-							</FormLabel>
-							<FormLabel>
-								<Tab _selected={{ color: 'white', bg: 'green.400', rounded: 'lg' }}> Alias </Tab>
-							</FormLabel>
+								<FormLabel>
+									<Tab 
+									_selected={{ color: 'white', bg: 'blue.500', rounded: 'lg' }}
+									> 
+										<input type="radio" value="email" id="email" {...register("type")} 
+										/>
+										Email
+									</Tab>
+								</FormLabel>
+								<FormLabel>
+									<Tab _selected={{ color: 'white', bg: 'blue.500', rounded: 'lg' }}> ID </Tab>
+								</FormLabel>
+								<FormLabel>
+									<Tab _selected={{ color: 'white', bg: 'blue.500', rounded: 'lg' }}> Alias </Tab>
+								</FormLabel>
 							</TabList>
 
+						<FormControl isInvalid={errors.destination}>
+
 							<TabPanels>
-							<TabPanel>	
-								<Input type="text" size="md" placeholder="alan@turing.com" 
-								{...register("name")}
-								/>
-								<FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
-							</TabPanel>
-							<TabPanel>
-								<Input type="text" size="md" placeholder="XXX-XXX-XXX" 
-								{...register("name")}
-								/>
-								<FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
-							</TabPanel>
-							<TabPanel>
-								<Input type="text" size="md" placeholder="enigma_cracker_52"
-								{...register("name")}
-								/>
-								<FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
-							</TabPanel>
+								<TabPanel>	
+									<Input type="text" size="md" placeholder="alan@turing.com" 
+									{...register("destination")}
+									/>
+									<FormErrorMessage> {errors.destination && ERROR_YUP.MSG_DESTINATION} </FormErrorMessage>
+								</TabPanel>
+								<TabPanel>
+									{/* <Input type="text" size="md" placeholder="XXX-XXX-XXX" 
+									{...register("name")}
+									/>
+									<FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage> */}
+								</TabPanel>
+								<TabPanel>
+									{/* <Input type="text" size="md" placeholder="enigma_cracker_52"
+									{...register("name")}
+									/>
+									<FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage> */}
+								</TabPanel>
 							</TabPanels>
 
 						</FormControl>
@@ -92,42 +125,41 @@ export default function PayForm () {
 					pt={6}
 					gap={6}
 					>
-
-						<FormControl isInvalid={errors.name}>
+						<FormControl isInvalid={errors.money}>
 							<FormLabel> 
 								<Heading size={"xs"}  pb={2}> Método de pago </Heading>
 							</FormLabel>
 							<Select 
 							placeholder='Selecciona una moneda' color={"purple.500"}
-							{...register("name")}>
+							{...register("money")}>
 								<option value='USDT'>USDT</option>
 								<option value='XRP'>XRP</option>
 								<option value='LTC'>LTC</option>
 							</Select>
-							<FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
+							<FormErrorMessage> {errors.money && ERROR_YUP.MSG_MONEY} </FormErrorMessage>
 						</FormControl>
 
-						<FormControl isInvalid={errors.name}>
+						<FormControl isInvalid={errors.amount}>
                         	<FormLabel> 
 								<Heading size={"xs"}  pb={2}> Monto a pagar </Heading>
 							</FormLabel>
-                            <Input type="text" size="md" placeholder="00.00" 
-                            {...register("name")}
+                            <Input type="number" size="md" placeholder="00.00" 
+                            {...register("amount")}
                             />
-                        	<FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
+                        	<FormErrorMessage> {errors.amount && ERROR_YUP.MSG_AMOUNT} </FormErrorMessage>
                     	</FormControl>
 
 					</Flex>
 
-					<FormControl isInvalid={errors.name} pt={6}>
+					<FormControl isInvalid={errors.note} pt={6}>
 						<FormLabel> 
 							<Heading size={"xs"} pb={1}> Nota </Heading>
 						</FormLabel>
 						<Textarea
                             fontSize={["xs", "md"]}
                             placeholder="Mensaje opcional"
-                            {...register('mensaje')}/>
-						<FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
+                            {...register('note')}/>
+						<FormErrorMessage> {errors.note && ERROR_YUP.MSG_NOTE} </FormErrorMessage>
                     </FormControl>
 
 					<Flex pt={8} gap={8}>
