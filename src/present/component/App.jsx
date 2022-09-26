@@ -19,6 +19,11 @@ import MiPerfil from "../../infra/components/Dashboard/MiPerfil";
 import Seguridad from "../../infra/components/Dashboard/Seguridad";
 import BalanceDeActivos from "../../infra/components/Dashboard/BalanceDeActivos/BalanceDeActivos";
 import Soporte from "../../infra/components/Dashboard/Soporte";
+// Guides components
+import Guides from "../../infra/components/Guides/atom/Guides";
+import GTrade from "../../infra/components/Guides/atom/GTrade";
+import GDeposito from "../../infra/components/Guides/atom/GDeposito";
+import GWallet from "../../infra/components/Guides/atom/GWallet";
 // no components
 import NotFound from "../../infra/components/NotFound/NotFound";
 
@@ -45,6 +50,11 @@ function App() {
 					<Route path="balance" element={<BalanceDeActivos />}/>
 					<Route path="support" element={<Soporte />}/>
 				</Route>
+			</Route>
+			<Route path="/Guides" element={<Guides />}>
+				<Route path="gtrade" element={<GTrade />}/>
+				<Route path="gdeposito" element={<GDeposito />}/>
+				<Route path="gwallet" element={<GWallet />}/>
 			</Route>
 			<Route path="*" element={ <NotFound /> } />
 		</Routes>
