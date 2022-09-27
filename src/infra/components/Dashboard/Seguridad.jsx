@@ -1,27 +1,14 @@
 import { schema, ERROR_YUP } from '../../api/yup';
 
-import {
-    Button,
-    chakra,
-    Flex,
-    Switch,
-    FormControl,
-    FormLabel,
-    Heading,
-    Input,
-    Radio,
-    RadioGroup,
-    Text,
-    InputGroup,
-    InputRightElement,
-    IconButton,
-    FormErrorMessage,
+import { Button, chakra, Flex, Switch, FormControl, 
+         FormLabel, Heading, Input, Tag, Divider,
+         Text, InputGroup, InputRightElement, IconButton, FormErrorMessage
 } from '@chakra-ui/react';
 
 // icons
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { FcGoogle } from 'react-icons/fc';
-import { BiMailSend } from 'react-icons/bi';
+import { Lock } from '@mui/icons-material';
+import { Email } from '@mui/icons-material';
 
 // hooks
 import { useState } from "react";
@@ -65,16 +52,6 @@ function Seguridad(){
     const onSubmit = async ( payload ) => {
 
         try {
-
-            // MOCK
-            // const account = users.find( (user) => user.email == email );
-            // if (account && account.psw == psw) {
-            //     setAuth(true);
-            //     localStorage.setItem("auth", true);
-            //     console.log(auth);
-            // }
-
-            // await axios.post(POST.NEW_USER, payload);
             resultToast("success", "¡Tu contraseña ha sido actualizada!🎉");
         } 
         catch (error) { 
@@ -84,113 +61,68 @@ function Seguridad(){
 
     return(
         <Flex
-            flex={0.75}
-            bg='gray.700'
-            direction={'column'}
-            justifyContent={'space-between'}
-            p={10}>
+        flex={0.75}
+        bg='gray.700'
+        direction={'column'}
+        justifyContent={'space-between'}
+        p={10}>
             <Heading
                 color={'yellow.200'}
-                textAlign={'left'}
                 fontWeight={'bold'}
-                fontSize={'120%'}>
+                fontSize={'lg'}>
                 Seguridad
             </Heading>
-            <Text textAlign={'justify'} color={'gray.400'} fontSize={'80%'}>
-                Te recomendamos, por tu seguridad, utilizar una doble autenticación o la autenticación de Google
-            </Text>
             <Flex
+                align="center"
                 direction={{ base: 'column', md: 'row' }}
                 justifyContent={'space-between'}
-                mb={'5%'}>
+                >
                 <chakra.h3
-                    fontFamily={'Work Sans'}
                     fontWeight={'bold'}
-                    fontSize={'75%'}
-                    textTransform={'uppercase'}
+                    fontSize={'md'}
                     color={'white'}>
-                    <Flex gap={2} alignItems={'center'}>
-                        <BiMailSend size={20} />
-                        <Text>Email Authentication</Text>
+                    <Flex gap={6} alignItems={'center'}>
+                        <Email size={20} />
+                        <Text> Correo electrónico </Text>
+                        <Tag variant="solid" colorScheme="gray"> No verificado </Tag>
+                        {/* <Tag variant="solid" colorScheme="green"> Verificado </Tag> */}
                     </Flex>
                 </chakra.h3>
-                <Switch/>            
+                <Button colorScheme={'yellow'} variant={'solid'} type="submit">
+                    Verificar
+                </Button>         
             </Flex>
             <Flex
                 direction={{ base: 'column', md: 'row' }}
                 justifyContent={'space-between'}
-                mb={'3%'}>
+                >
                 <chakra.h3
-                    fontFamily={'Work Sans'}
                     fontWeight={'bold'}
-                    fontSize={'75%'}
-                    textTransform={'uppercase'}
+                    fontSize={'md'}
                     color={'white'}>
-                    <Flex gap={2} alignItems={'center'}>
-                        <FcGoogle size={20} />
-                        <Text>Google Authentication</Text>
+                    <Flex gap={6} alignItems={'center'}>
+                        <Lock size={20} />
+                        <Text> Autenticación de 2 factores (2FA) </Text>
                     </Flex>
                 </chakra.h3>
                 <Switch/>            
             </Flex>
-            <chakra.hr></chakra.hr>
+            
+            <Divider orientation='horizontal' />
+            
             <Heading
                 color={'yellow.200'}
-                textAlign={'left'}
                 fontWeight={'bold'}
-                fontSize={'120%'}>
-                Tipo de Wallet
-            </Heading>
-            <Text textAlign={'justify'} color={'gray.400'} fontSize={'80%'}>
-                Para información sobre los tipos de wallet, puedes visitar la sección de Soporte 
-            </Text>
-            <RadioGroup>
-                <Flex
-                    direction={{ base: 'column', md: 'row' }}
-                    justifyContent={'space-between'}
-                    mb={'5%'}>
-                    <chakra.h3
-                        fontFamily={'Work Sans'}
-                        fontWeight={'bold'}
-                        fontSize={'75%'}
-                        textTransform={'uppercase'}
-                        color={'white'}>
-                        Pública
-                    </chakra.h3>
-                    <Radio value='0'/>            
-                </Flex>
-                <Flex
-                    direction={{ base: 'column', md: 'row' }}
-                    justifyContent={'space-between'}
-                    mb={'3%'}>
-                    <chakra.h3
-                        fontFamily={'Work Sans'}
-                        fontWeight={'bold'}
-                        fontSize={'75%'}
-                        textTransform={'uppercase'}
-                        color={'white'}>
-                        Anónima
-                    </chakra.h3>
-                    <Radio value='1'/>            
-                </Flex>
-            </RadioGroup>    
-            <chakra.hr></chakra.hr>
-            <Heading
-                color={'yellow.200'}
-                textAlign={'left'}
-                fontWeight={'bold'}
-                fontSize={'120%'}>
+                fontSize={'lg'}>
                 Cambiar contraseña
             </Heading>
-            <Text textAlign={'justify'} color={'gray.400'} fontSize={'80%'}>
-                Te recomendamos usar una contraseña que no utilices para conectarte en otros sitios web
-            </Text>
             <form>
                 <Flex
-                    direction={'column'}
-                    >
-                    <FormControl id="password" color={'gray.400'} w={'auto'}>
-                        <FormLabel>Contraseña actual</FormLabel>
+                direction={'column'}
+                gap={4}
+                >
+                    <FormControl id="password" color={'white'}>
+                        <FormLabel> Contraseña actual </FormLabel>
                         <InputGroup>
                             <Input placeholder="Contraseña" type={showOld ? 'text' : 'password'} />
                             <InputRightElement>

@@ -12,7 +12,8 @@ import { useToast } from "@chakra-ui/react";
 
 // components
 import { Button, FormControl, FormLabel, FormErrorMessage, Input, 
-         Stack, InputGroup, InputRightElement, IconButton, Box
+         Stack, InputGroup, InputRightElement, IconButton, Box,
+         InputLeftAddon
 } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 
@@ -50,9 +51,6 @@ export default function SignForm () {
 
     const navigate = useNavigate();
 
-    // const [jwt, setJwt] = useState("");
-    // const [authError, setJwtError] = useState("");
-
     const onSubmit = async ( payload ) => {
 
         await axios.post(POST.NEW_USER, payload)
@@ -86,6 +84,17 @@ export default function SignForm () {
                             {...register("email")} 
                             />
                         <FormErrorMessage> {errors.email && ERROR_YUP.MSG_EMAIL} </FormErrorMessage>
+                    </FormControl>
+
+                    <FormControl isInvalid={errors.tlf}>
+                        <FormLabel> Número de teléfono </FormLabel>
+                            <InputGroup>
+                                {/* <InputLeftAddon children='+58' /> */}
+                                <Input type="tel" size="md" placeholder="+584121234567"
+                                {...register("tlf")} 
+                                />
+                            </InputGroup>
+                        <FormErrorMessage> {errors.tlf && ERROR_YUP.MSG_TLF} </FormErrorMessage>
                     </FormControl>
 
                     <FormControl isInvalid={errors.psw}>

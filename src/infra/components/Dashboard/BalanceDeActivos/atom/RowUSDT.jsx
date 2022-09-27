@@ -1,42 +1,26 @@
 import {
-    Table,
-    Tbody,
     Tr,
     Td,
-    TableContainer,
 } from '@chakra-ui/react';
 
 function RowUSDT(props){
 
-    const { tipo, fecha, hora, monto, saldo } = props;
+    let { type, from_to, amount, balance, money, date } = props;
 
-    if (tipo == 'ingreso'){
-        return(
-            <TableContainer>
-                <Table>
-                    <Tbody>
-                        <Tr>
-                            <Td color={'white'}>{fecha}{'-'}{hora}</Td>
-                            <Td color={'white'} isNumeric>{monto}</Td>
-                            <Td color={'white'} isNumeric>{saldo}</Td>
-                        </Tr>
-                    </Tbody>
-                </Table>
-            </TableContainer>
-        )
-    }
+    let iat = (new Date(date * 1000)).toLocaleString();
+    let data = iat.split(",");
+    let currentDate = data[0].trim();
+    let currentHour = data[1].trim();
+    money = money.toUpperCase();
+
     return(
-        <TableContainer>
-            <Table>
-                <Tbody>
-                    <Tr>
-                        <Td color={'white'}>{fecha}{'-'}{hora}</Td>
-                        <Td color={'red'} isNumeric>-{monto}</Td>
-                        <Td color={'white'} isNumeric>{saldo}</Td>
-                    </Tr>
-                </Tbody>
-            </Table>
-        </TableContainer>
+        <Tr>
+            <Td color={'white'} >{currentDate}</Td>
+            <Td color={'white'} >{currentHour}</Td>
+            <Td color={'white'} >{from_to}</Td>
+            <Td color={type == "credit" ? "green" : "red"} >{amount}{" "}{money}</Td>
+            <Td color={'white'} >{balance}{" "}{money}</Td>
+        </Tr>
     )
 }
 

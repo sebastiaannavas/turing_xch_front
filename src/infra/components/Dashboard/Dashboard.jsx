@@ -12,6 +12,7 @@ export default function Dashboard () {
         <>
             <Flex
                 bg={'black'}
+                h={"87vh"}
                 width={'full'}
                 direction={{ base: 'column', md: 'row'}}
                 gap={2}>

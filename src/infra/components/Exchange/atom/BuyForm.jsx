@@ -39,7 +39,7 @@ export default function BuyForm () {
                     <FormControl isInvalid={errors.name}>
                         <InputGroup>
                             <InputLeftAddon children='Precio' bg={"transparent"} />
-                            <Input type="text" size="md" borderStartColor="transparent"
+                            <Input type="number" size="md" borderStartColor="transparent"
                             {...register("name")}
                             />
                             <InputRightAddon children='XRP' />
@@ -50,7 +50,7 @@ export default function BuyForm () {
                     <FormControl isInvalid={errors.email}>
                         <InputGroup>
                             <InputLeftAddon children='Cantidad' />
-                            <Input type="text" size="md" 
+                            <Input type="number" size="md" 
                             {...register("email")}
                             />
                             <InputRightAddon children='USDT' />

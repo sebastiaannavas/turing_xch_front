@@ -1,11 +1,11 @@
 // components
-import { Flex, Stack, Heading, Text, useColorModeValue } from '@chakra-ui/react';
-import RecoverForm from './atom/RecoverForm';
+import { Flex, Stack, Heading, Text } from '@chakra-ui/react';
+import NewPswForm from './atom/NewPswForm';
 
 // icons
 import { TuringIcon } from '../../../app/common/Icons/TuringIcon';
 
-export default function RecoverPassword () {
+export default function NewPsw () {
 
     return (
         <>
@@ -16,7 +16,6 @@ export default function RecoverPassword () {
                 <Flex
                     flex={1}
                     pt={6}
-                    gap={4}
                     direction={"column"}
                     align={"center"}
                     justify={"center"}
@@ -31,25 +30,26 @@ export default function RecoverPassword () {
                     </Flex>
 
                     <Stack
-                    gap={12}
+                    gap={8}
                     p={10}
                     >
                         <Stack
                         gap={2}
                         >
                             <Text fontSize={['2xl', '3xl']} textAlign="center" color={"gray.100"}> 
-                                    ¿Olvidaste tu contraseña?
+                                    Establecer nueva contraseña
                             </Text>
                             <Text
                                 fontSize={{ base: 'sm', sm: 'md' }}
                                 color={"purple.400"}
                                 textAlign="center"
                                 >
-                                Se enviará un código de recuperación al correo que ingreses
+                                A partir de ahora, deberás iniciar sesión con la contraseña que envíes
                             </Text>
                         </Stack>
 
-                        <RecoverForm />
+                        <NewPswForm />
+
                     </Stack>
                 </Flex>
             </Flex>

@@ -8,8 +8,10 @@ import { Routes, Route } from "react-router-dom";
 import NoNavbar from "../../infra/components/NoNavbar/NoNavbar";
 import Signin from "../../infra/components/Signin/Signin";
 import Login from "../../infra/components/Login/Login";
+import Verify2FA from "../../infra/components/Verify2FA/Verify2FA";
 import RecoverPsw from "../../infra/components/RecoverPsw/RecoverPsw";
 import EmailVerify from "../../infra/components/EmailVerify/EmailVerify";
+import NewPsw from "../../infra/components/RecoverPsw/NewPsw";
 // landing components
 import Navbar from "../../infra/components/Navbar/Navbar";
 import Landing from "../../infra/components/Landing/Landing";
@@ -39,8 +41,10 @@ function App() {
 			<Route element={ <NoNavbar /> }>
 				<Route path="/signin" element={ <Signin /> } />
 				<Route path="/login" element={ <Login /> } />
+				<Route path="/authentication" element={ <Verify2FA /> } />
 				<Route path="/recover" element={ <RecoverPsw /> } />
 				<Route path="/verification" element={ <EmailVerify /> } />
+				<Route path="/recovery" element={ <NewPsw /> } />
 			</Route>
 			<Route path="account" element={ <UserNavbar /> }>
 				<Route index element={ <Exchange /> } />

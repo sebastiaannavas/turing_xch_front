@@ -118,6 +118,7 @@ export default function UserLinks ( {isOpen} ) {
 						>
 							<Avatar
 							name="Alan"
+							// TODO: reducer for first panel name
 							size={"50px"}
 							variant='bauhaus'
 							colors={["#9d4edd", "#613dc1", "#f72585", "#ffce1f", "#ff6d00"]}

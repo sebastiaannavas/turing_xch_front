@@ -1,79 +1,114 @@
-import {
-    Button,
-    Flex,
-    Heading,
-    Stack,
-    Text,
-} from '@chakra-ui/react';
-import Avatar from 'boring-avatars';
+// dependencies
+import axios from "axios";
+import { GET } from "../../api/endpoints";
+
+// routes
 import { Link } from 'react-router-dom';
 
+// hooks
+import { useState, useEffect } from 'react';
 
-// Esta data se extrae de la base de datos. Estos son mocks
-export const personalData = {
-    name: 'Alan',
-    lastname: 'Turing',
-    username: 'alanturing',
-    email: 'alan@turing.com',
-    id: 'xx-xx-xx-xx',
-    address: 'xxx-xxx-xxx-xxx',
-}
+// components
+import { Button, Flex, Heading, Stack, Spinner } from '@chakra-ui/react';
+import Avatar from 'boring-avatars';
+
 
 function FirstPanel(){
 
     const logout = () => localStorage.removeItem("auth");
 
-    const { name, lastname, username, id } = personalData;
+    const [loading, setLoading] = useState(true);
+
+    const [profile, setProfile] = useState();
+
+    const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem("auth")}` }
+    };
+
+    const getUser = async () => {
+
+        await axios.get(GET.USER_PROFILE, config)
+        .then( response => {
+            console.log(response.data.msg);
+            setProfile(response.data.msg);
+            setLoading(false);
+        })
+        .catch( error => {
+            console.log(error);
+        });
+    };
+
+    useEffect(() => { 
+
+        window.addEventListener("load", getUser);
+
+        return () => {
+            window.removeEventListener("load", getUser);
+        };
+
+    }, []);
 
     return(
+
         <Flex
             flex={0.25}
-            pt={8}
-            pb={5}
             bg={'gray.400'}
             direction={'column'}
-            alignItems={'space-between'}>
+            // alignItems={'space-between'}
+            >
+
+            {loading && 
+            <Spinner
+            thickness='4px'
+            speed='0.65s'
+            emptyColor='gray.200'
+            color='purple.500'
+            size='xl'
+            />
+            }
+
+            {!loading &&
+
+            <>
             <Stack
-                px={5}
-                width={'full'}
+                // width={'full'}
+                pt={10}
+                pb={6}
+                gap={2}
                 direction={'column'}
                 alignItems={'center'}>
                 <Avatar 
-                    size={'180px'}
-                    name={name}
+                    size={'120px'}
+                    name={profile.name}
                     variant='bauhaus'
 					colors={["#9d4edd", "#613dc1", "#f72585", "#ffce1f", "#ff6d00"]}
                     />
-                <Heading>
-                    {name}{' '}{lastname}
+                <Heading size="lg">
+                    {profile.name}
                 </Heading>
-                <Text>
-                    {username}{' '}{id}
-                </Text>
-
             </Stack>
             <Stack
-                px={2}
-                display={'flex'}
-                alignItems={'space-between'}
+                px={10}
+                // display={'flex'}
+                // alignItems={'space-between'}
                 gap={4}>
                 <Link to=''>
-                    <Button variant={'ghost'} width={'full'} mt={'3%'}>
+                    <Button variant={'ghost'} width={'full'} >
                         Mi perfil
                     </Button>
                 </Link>
                 <Link to='security'>
-                    <Button variant={'ghost'} width={'full'} mt={'3%'}>
+                    <Button variant={'ghost'} width={'full'} >
                         Seguridad
                     </Button>
                 </Link>
                 <Link to='balance'>
-                    <Button variant={'ghost'} width={'full'} mt={'3%'}>
+                    <Button variant={'ghost'} width={'full'} >
                         Balance de activos
                     </Button>
                 </Link>
                 <Link to='support'>
-                    <Button variant={'ghost'} width={'full'} mt={'3%'}>
+                    <Button variant={'ghost'} width={'full'} >
                         Soporte
                     </Button>
                 </Link>
@@ -81,13 +116,14 @@ function FirstPanel(){
                     <Button
                         variant={'outline'}
                         width={'full'}
-                        mt={'3%'}
-                        bg={'red.600'}
+                        colorScheme="red"
                         onClick={logout}>
                         Cerrar sesión
                     </Button>
                 </Link>
             </Stack>
+            </>
+            }
         </Flex>
     )
 }

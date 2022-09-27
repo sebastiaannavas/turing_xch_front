@@ -1,187 +1,197 @@
-import {
-    Box,
-    Button,
-    chakra,
-    Flex,
-    FormControl,
-    FormErrorMessage,
-    FormLabel,
-    Heading,
-    Input,
-    Text,
+// dependencies
+import axios from "axios";
+import { GET } from "../../api/endpoints";
+
+// hooks
+import { useState, useEffect } from 'react';
+
+// components
+import { Box, Button, Flex, Divider, 
+         Heading, Input, Spinner
 } from '@chakra-ui/react';
-import { schema, ERROR_YUP } from '../../api/yup';
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useToast } from "@chakra-ui/react";
 
-// Mock de datos del usuario
-import { personalData } from './FirstPanel';
+function MiPerfil () {
 
-function MiPerfil(){
+    const [loading, setLoading] = useState(true);
 
-    const { register, handleSubmit, formState:{ errors } } = useForm({
-        resolver: yupResolver(schema.changemail)
-    });
+    const [profile, setProfile] = useState();
 
-    const toast = useToast();
+    const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem("auth")}` }
+    };
 
-    const resultToast = ( status, title ) => {
+    const getUser = async () => {
 
-        return toast({
-            title: title,
-            status: status,
-            duration: 5000,
-            isClosable: true,
+        await axios.get(GET.USER_PROFILE, config)
+        .then( response => {
+            console.log(response.data.msg);
+            setProfile(response.data.msg);
+            setLoading(false);
+        })
+        .catch( error => {
+            console.log(error);
         });
     };
 
-    const onSubmit = async ( payload ) => {
+    useEffect(() => { 
 
-        try {
+        window.addEventListener("load", getUser);
 
-            // MOCK
-            // const account = users.find( (user) => user.email == email );
-            // if (account && account.psw == psw) {
-            //     setAuth(true);
-            //     localStorage.setItem("auth", true);
-            //     console.log(auth);
-            // }
+        return () => {
+            window.removeEventListener("load", getUser);
+        };
 
-            // await axios.post(POST.NEW_USER, payload);
-            resultToast("success", "Correo actualizado!🎉");
-        } 
-        catch (error) { 
-            resultToast("error", "Se produjo un problema 😥");
-        }
-    };
+    }, []);
 
-    const { name, lastname, email, id, address } = personalData;
 
-    return(
+    return (
         <Flex
-            flex={0.75}
-            bg='gray.700'
-            direction={'column'}
-            justifyContent={'space-between'}
-            p={10}>
+        flex={0.75}
+        bg='gray.700'
+        direction={'column'}
+        justifyContent={'space-between'}
+        p={10}
+        >
+
+            {loading && 
+            <Spinner
+            thickness='4px'
+            speed='0.65s'
+            emptyColor='gray.200'
+            color='purple.500'
+            size='xl'
+            />
+            }
+
+            {!loading && 
+
+            <>
             <Heading
                 color={'yellow.200'}
-                textAlign={'left'}
                 fontWeight={'bold'}
-                fontSize={'120%'}>
+                fontSize={'xl'}
+                >
                 Mi perfil
             </Heading>
-            <Text textAlign={'justify'} color={'gray.400'} fontSize={'80%'}>
-                Datos personales
-            </Text>
+
             <Flex
-                direction={{ base: 'column', md: 'row' }}
-                justifyContent={'space-between'}
-                mb={'5%'}>
-                <chakra.h3
-                    fontFamily={'Work Sans'}
-                    fontWeight={'bold'}
-                    fontSize={'75%'}
-                    textTransform={'uppercase'}
-                    color={'white'}>
+            direction={{ base: 'column', md: 'row' }}
+            align="center"
+            justifyContent={'space-between'}
+            >
+                <Heading
+                fontWeight={'bold'}
+                fontSize={'md'}
+                color={'white'}>
                     Nombre y Apellido
-                </chakra.h3>
+                </Heading>
                 <Box
-                    textAlign={'center'}
-                    color={'gray.500'}
-                    bg={'gray.800'}
-                    minW={'175px'}>
-                    {name}{' '}{lastname}
+                minW={"250px"}
+                py={2}
+                rounded={'lg'}
+                textAlign={'center'}
+                color={'gray.500'}
+                bg={'gray.800'}
+                >
+                    {profile.name}
                 </Box>         
             </Flex>
+
             <Flex
-                direction={{ base: 'column', md: 'row' }}
-                justifyContent={'space-between'}
-                mb={'5%'}>
-                <chakra.h3
-                    fontFamily={'Work Sans'}
-                    fontWeight={'bold'}
-                    fontSize={'75%'}
-                    textTransform={'uppercase'}
-                    color={'white'}>
-                    Dirección de correo
-                </chakra.h3>
+            direction={{ base: 'column', md: 'row' }}
+            align="center"
+            justifyContent={'space-between'}
+            >
+                <Heading
+                fontWeight={'bold'}
+                fontSize={'md'}
+                color={'white'}>
+                    Dirección de correo electrónico
+                </Heading>
                 <Box
-                    textAlign={'center'}
-                    color={'gray.500'}
-                    bg={'gray.800'}
-                    minW={'175px'}>
-                    {email}
+                minW={"250px"}
+                py={2}
+                rounded={'lg'}
+                textAlign={'center'}
+                color={'gray.500'}
+                bg={'gray.800'}
+                >
+                    {profile.email}
                 </Box>         
             </Flex>
+
             <Flex
-                direction={{ base: 'column', md: 'row' }}
-                justifyContent={'space-between'}
-                mb={'5%'}>
-                <chakra.h3
-                    fontFamily={'Work Sans'}
-                    fontWeight={'bold'}
-                    fontSize={'75%'}
-                    textTransform={'uppercase'}
-                    color={'white'}>
-                    ID de usuario
-                </chakra.h3>
+            direction={{ base: 'column', md: 'row' }}
+            align="center"
+            justifyContent={'space-between'}
+            >
+                <Heading
+                fontWeight={'bold'}
+                fontSize={'md'}
+                color={'white'}>
+                    ID de la cuenta
+                </Heading>
                 <Box
-                    textAlign={'center'}
-                    color={'gray.500'}
-                    bg={'gray.800'}
-                    minW={'175px'}>
-                    {id}
+                minW={"250px"}
+                py={2}
+                rounded={'lg'}
+                textAlign={'center'}
+                color={'gray.500'}
+                bg={'gray.800'}
+                >
+                    {profile.uuid}
                 </Box>         
             </Flex>
+
             <Flex
-                direction={{ base: 'column', md: 'row' }}
-                justifyContent={'space-between'}
-                mb={'3%'}>
-                <chakra.h3
-                    fontFamily={'Work Sans'}
-                    fontWeight={'bold'}
-                    fontSize={'75%'}
-                    textTransform={'uppercase'}
-                    color={'white'}>
-                    Dirección de depósito
-                </chakra.h3>
+            direction={{ base: 'column', md: 'row' }}
+            align="center"
+            justifyContent={'space-between'}
+            // mb={2}
+            >
+                <Heading
+                fontWeight={'bold'}
+                fontSize={'md'}
+                color={'white'}>
+                    Teléfono
+                </Heading>
                 <Box
-                    textAlign={'center'}
-                    color={'gray.500'}
-                    bg={'gray.800'}
-                    minW={'175px'}>
-                    {address}
+                minW={"250px"}
+                py={2}
+                rounded={'lg'}
+                textAlign={'center'}
+                color={'gray.500'}
+                bg={'gray.800'}
+                >
+                    {profile.tlf}
                 </Box>         
             </Flex>
-            <chakra.hr></chakra.hr>
+
+            <Divider orientation='horizontal' />
+
             <Heading
                 color={'yellow.200'}
-                textAlign={'left'}
                 fontWeight={'bold'}
-                fontSize={'120%'}
-                mt={'3%'}>
+                fontSize={'xl'}
+                >
                 Cambiar dirección de correo electrónico
             </Heading>
-            <Text textAlign={'justify'} color={'gray.400'} fontSize={'80%'}>
-                Ingresa una dirección de correo activa que dispongas.
-            </Text>
+
             <form>
                 <Flex
-                    direction={'column'}
-                    >
-                    <FormControl isInvalid={errors.email} color={'white'} w={'auto'}>
-                        <FormLabel>Nuevo correo</FormLabel>
-                        <Input type="email" placeholder="alan@turing.com" {...register("email")}/>
-                        <FormErrorMessage>{errors.email && ERROR_YUP.MSG_EMAIL}</FormErrorMessage>
-                    </FormControl>
-                        <Button colorScheme={'blue'} variant={'solid'} mt={2}  onClick={handleSubmit(onSubmit)}>
-                            Guardar correo
-                        </Button>
+                direction={'column'}
+                gap={4}
+                >
+                    <Input type="email" placeholder="alan@turing.com"/>
+                    
+                    <Button colorScheme={'blue'} variant={'solid'}>
+                        Guardar correo
+                    </Button>
                 </Flex>
             </form>
+            </>
+            }
         </Flex>
     )
 }
