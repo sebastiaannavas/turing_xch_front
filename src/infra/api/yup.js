@@ -23,7 +23,7 @@ const schema = {
     
         email: yup.string().email().required(), 
 
-        tlf: yup.string().min(13).max(13).required().matches(/^[+]?[1-9]+$/),
+        tlf: yup.string().min(13).max(13).required(),
     
         psw: yup.string().required().min(8).max(18)
         .matches(/^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/),
