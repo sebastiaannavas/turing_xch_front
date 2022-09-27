@@ -1,5 +1,6 @@
 // routes
 import { Link } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
 
 // components
 import { Button, IconButton, Box, Stack, Tooltip } from "@chakra-ui/react";
@@ -41,21 +42,21 @@ export default function NavLinks ( {isOpen} ) {
 				_hover={{ color: "purple.400" }}
 				transition={'color 0.5s ease'}
 				>
-					<Link to="/" style={{ fontWeight: "bold" }}> Mercado </Link>
+					<HashLink smooth to="/#market" style={{ fontWeight: "bold", textDecoration: "none" }}> Mercado </HashLink>
 				</Box>
 
 				<Box
 				_hover={{ color: "purple.400" }}
 				transition={'color 0.5s ease'}
 				>
-					<Link to="/" style={{ fontWeight: "bold" }}> Blog </Link>
+					<HashLink smooth to="/#blog" style={{ fontWeight: "bold", textDecoration: "none" }}> Blog </HashLink>
 				</Box>
 
 				<Box
 				_hover={{ color: "purple.400" }}
 				transition={'color 0.5s ease'}
 				>
-					<Link to="/" style={{ fontWeight: "bold" }}> Nosotros </Link>
+					<HashLink smooth to="/#about" style={{ fontWeight: "bold", textDecoration: "none" }}> Nosotros </HashLink>
 				</Box>
 
 				<Stack direction="row" spacing='4'>

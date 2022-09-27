@@ -1,5 +1,6 @@
 // components
 import { Stack, Text, Flex, SimpleGrid, Link, Highlight } from "@chakra-ui/react";
+import { HashLink } from 'react-router-hash-link';
 import { IconContext } from "react-icons";
 
 // icons
@@ -13,7 +14,8 @@ const MediaButton = ( { children, href } ) => {
             <Link
             href={href}
             color={"gray.400"}
-            _hover={{ color: 'purple.500' }}
+            _hover={{ color: '#11001c' }}
+            target="_blank"
             transition={'color 0.5s ease'}
             >
                 <IconContext.Provider 
@@ -75,16 +77,16 @@ export default function Footer() {
                         </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader> Acerca de Turing</ListHeader>
-                        <Link href={'#'}> Nosotros </Link>
-                        <Link href={'#'}> Patrocinadores </Link>
-                        <Link href={'https://www.binance.com/es/binance-api'}> Binance API </Link>
+                        <Link as={HashLink} smooth to="/#about"> Nosotros </Link>
+                        <Link as={HashLink} smooth to="/#partners"> Patrocinadores </Link>
+                        <Link href={'https://www.binance.com/es/binance-api'} target="_blank"> Binance API </Link>
                     </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader> Soporte </ListHeader>
                         <Link href={'mailto:turingwallet@gmail.com'}> Atención al cliente </Link>
-                        <Link href={'#'}> Blog / FAQ </Link>
-                        <Link href={'#'}> Términos y Condiciones</Link>
-                        <Link href={'#'}> Política de Privacidad</Link>
+                        <Link as={HashLink} smooth to="/#blog"> Blog / FAQ </Link>
+                        <Link href={''}> Términos y Condiciones</Link>
+                        <Link href={''}> Política de Privacidad</Link>
                     </Stack>
                 </SimpleGrid>
             </Flex>

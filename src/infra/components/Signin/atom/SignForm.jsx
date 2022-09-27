@@ -12,8 +12,10 @@ import { useToast } from "@chakra-ui/react";
 
 // components
 import { Button, FormControl, FormLabel, FormErrorMessage, Input, 
-         Stack, InputGroup, InputRightElement, IconButton
+         Stack, InputGroup, InputRightElement, IconButton, Box,
+         InputLeftAddon, Flex
 } from '@chakra-ui/react';
+import { Link } from "react-router-dom";
 
 // icons
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -49,39 +51,17 @@ export default function SignForm () {
 
     const navigate = useNavigate();
 
-
-    // --- MOCK
-
-    const [email, setEmail] = useState("alan@turing.com");
-    const [psw, setPsw] = useState("Alanturing123.");
-    const users = [{ email: "alan@turing.com", psw: "Alanturing123." }];
-
-    // --- MOCK
-
-
     const onSubmit = async ( payload ) => {
 
-        try {
-
-            // await axios.post(POST.NEW_USER, payload);
-            
-            // --- MOCK
-            
-            const account = users.find( (user) => user.email === email );
-            if (account && account.psw === psw) {
-                localStorage.setItem("auth", true);
-                console.log(JSON.stringify(payload));
-                navigate("/dashboard");
-                resultToast("success", "¡Tu cuenta ha sido registrada!🎉");
-            } else {
-                resultToast("error", "Aún no tienes una cuenta 😟");
-            }
-
-            // --- MOCK
-        } 
-        catch (error) { 
-            resultToast("error", "Se produjo un problema 😥");
-        }
+        await axios.post(POST.NEW_USER, payload)
+        .then( response => {
+            localStorage.setItem("auth", response.data.token);
+            navigate("/account");
+            resultToast("success", `${response.data.msg} 🎉`);
+        })
+        .catch( error => {
+            resultToast("error", `${error.response.data.description[0]} 😥`);
+        });
     };
 
     return (
@@ -93,7 +73,6 @@ export default function SignForm () {
                     <FormControl isInvalid={errors.name}>
                         <FormLabel> Nombre y apellido </FormLabel>
                             <Input type="text" size="md" placeholder="Alan Turing" 
-                            
                             {...register("name")}
                             />
                         <FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
@@ -101,30 +80,29 @@ export default function SignForm () {
 
                     <FormControl isInvalid={errors.email}>
                         <FormLabel> Correo electrónico </FormLabel>
-                            <Input type="email" size="md" placeholder="alan@turing.com" 
-                            // --- MOCK
-
-                            value={email}
-                            onChange={ (event) => setEmail(event.target.value) }
-
-                            // --- MOCK
-
+                            <Input type="text" size="md" placeholder="alan@turing.com" 
                             {...register("email")} 
                             />
                         <FormErrorMessage> {errors.email && ERROR_YUP.MSG_EMAIL} </FormErrorMessage>
                     </FormControl>
 
+                    <FormControl isInvalid={errors.tlf}>
+                        <FormLabel> Número de teléfono </FormLabel>
+                            <InputGroup>
+                                {/* <InputLeftAddon children='+58' /> */}
+                                <Input type="tel" size="md" placeholder="+584121234567"
+                                {...register("tlf")} 
+                                />
+                            </InputGroup>
+                        <FormErrorMessage> {errors.tlf && ERROR_YUP.MSG_TLF} </FormErrorMessage>
+                    </FormControl>
+
+                    <Stack direction={"row"} gap={2}>
+
                     <FormControl isInvalid={errors.psw}>
                         <FormLabel> Contraseña </FormLabel>
                             <InputGroup size="md">
-                                <Input placeholder="Ingresa una contraseña" type={show ? 'text' : 'password'}
-                                // --- MOCK
-
-                                value={psw}
-                                onChange={ (event) => setPsw(event.target.value) }
-
-                                // --- MOCK
-
+                                <Input placeholder="Ingresar" type={show ? 'text' : 'password'}
                                 {...register("psw")}
                                 />
                                 <InputRightElement>
@@ -139,14 +117,7 @@ export default function SignForm () {
                     <FormControl isInvalid={errors.okPsw}>
                         <FormLabel> Confirmar contraseña </FormLabel>
                             <InputGroup size="md">
-                                <Input placeholder="Confirma tu contraseña" type={showOk ? 'text' : 'password'}
-
-                                // --- MOCK
-
-                                value={psw}
-
-                                // --- MOCK
-
+                                <Input placeholder="Volver a ingresar" type={showOk ? 'text' : 'password'}
                                 {...register("okPsw")}
                                 />
                                 <InputRightElement>
@@ -157,12 +128,25 @@ export default function SignForm () {
                             </InputGroup>
                         <FormErrorMessage> {errors.okPsw && ERROR_YUP.MSG_OKPSW} </FormErrorMessage>   
                     </FormControl>
+                    </Stack>
 
-                    <Stack pt={4}>
+                    <Stack pt={1}>
                         <Button colorScheme={'yellow'} variant={'solid'} type="submit">
                             Registrarse
                         </Button>
                     </Stack>
+
+                    <Box
+                    align={'center'}
+                    justify={'center'}
+                    fontWeight="600"
+                    pt={2}
+                    color={"gray.400"}
+                    _hover={{ color: "gray.600" }}
+                    transition={'color 0.5s ease'}
+                    >
+                        <Link to='/login'> ¿Ya tienes una cuenta? Inicia sesión </Link>
+                    </Box>
 
                 </Stack>
             </form>

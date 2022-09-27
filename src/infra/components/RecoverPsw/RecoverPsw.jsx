@@ -1,6 +1,6 @@
 // components
 import { Flex, Stack, Heading, Text, useColorModeValue } from '@chakra-ui/react';
-import RecoverPasswordForm from './atom/RecoverForm';
+import RecoverForm from './atom/RecoverForm';
 
 // icons
 import { TuringIcon } from '../../../app/common/Icons/TuringIcon';
@@ -15,6 +15,7 @@ export default function RecoverPassword () {
             >
                 <Flex
                     flex={1}
+                    pt={6}
                     gap={4}
                     direction={"column"}
                     align={"center"}
@@ -48,7 +49,7 @@ export default function RecoverPassword () {
                             </Text>
                         </Stack>
 
-                        <RecoverPasswordForm />
+                        <RecoverForm />
                     </Stack>
                 </Flex>
             </Flex>

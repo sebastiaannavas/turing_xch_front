@@ -25,7 +25,7 @@ export default function Login () {
                     ]}>
                     <Flex gap={4} align={"center"}>
                         <TuringIcon boxSize={[12, 16, 16, 16]} />
-                        <Heading fontSize={{ base: '2xl', sm: '3xl' }} textAlign="center" color={"white"} pb={2}> 
+                        <Heading fontSize={["xl", "4xl", "2xl", "4xl"]} textAlign="center" color={"white"} pb={2}> 
                                 Turing Exchange 
                         </Heading>
                     </Flex>
@@ -40,7 +40,7 @@ export default function Login () {
                     align={'center'} 
                     justify={'center'}>
                     <Stack 
-                        pt={[0, 0, 10, 8]}
+                        pt={[0, 0, 16, 14]}
                         maxW={'md'}
                         w={"full"}>
                         <LoginForm />

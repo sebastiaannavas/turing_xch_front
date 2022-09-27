@@ -1,21 +1,19 @@
 // dependencies
 import axios from "axios";
-import { POST } from "../../../api/endpoints";
+import { GET } from "../../../api/endpoints";
 import { schema, ERROR_YUP } from "../../../api/yup";
 
 // hooks
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useToast } from "@chakra-ui/react";
 
 // components
-import { Button, FormControl, FormLabel, FormErrorMessage, Input, 
-         Stack,
-} from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, FormErrorMessage, Input, Stack, Box } from '@chakra-ui/react';
+import { Link } from "react-router-dom";
 
 
-export default function RecoverPaswordForm () {
+export default function RecoverForm () {
 
     const { register, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(schema.recover)
@@ -33,32 +31,17 @@ export default function RecoverPaswordForm () {
         });
     };
 
-    // MOCK
-    // const [email, setEmail] = useState("alan@turing.com");
-    // const [psw, setPsw] = useState("Alanturing123.");
-    // const users = [{ email: "alan@turing.com", psw: "Alanturing123." }];
+    const onSubmit = async ( { email } = payload ) => {
 
-    // const [auth, setAuth] = useState(localStorage.getItem(localStorage.getItem("auth") || false));
-    // let [auth, setAuth] = useState(false);
+        // console.log(GET.RECOVER_PSW + email);
 
-    const onSubmit = async ( payload ) => {
-
-        try {
-
-            // MOCK
-            // const account = users.find( (user) => user.email == email );
-            // if (account && account.psw == psw) {
-            //     setAuth(true);
-            //     localStorage.setItem("auth", true);
-            //     console.log(auth);
-            // }
-
-            // await axios.post(POST.NEW_USER, payload);
-            resultToast("success", "¡El código ha sido enviado a tu correo!🎉");
-        } 
-        catch (error) { 
-            resultToast("error", "Se produjo un problema 😥");
-        }
+        await axios.get(GET.RECOVER_PSW + email)
+        .then( response => {
+            resultToast("success", `${response.data.msg} 🎉`);
+        })
+        .catch( error => {
+            resultToast("error", `${error.response.data.error} 😟`);
+        });
     };
 
     return (
@@ -69,11 +52,7 @@ export default function RecoverPaswordForm () {
                     px={'8px'}>
                     <FormControl isInvalid={errors.email}>
                         <FormLabel color={'yellow'}> Correo electrónico </FormLabel>
-                            <Input type="email" size="md" placeholder="alan@turing.com" color={'white'} variant={"filled"}
-                            // MOCK
-                            // value={email}
-                            // onChange={ (event) => setEmail(event.target.value) }
-
+                            <Input type="email" size="md" placeholder="alan@turing.com" color={'white'}
                             {...register("email")} 
                             />
                         <FormErrorMessage> {errors.email && ERROR_YUP.MSG_EMAIL} </FormErrorMessage>
@@ -82,6 +61,17 @@ export default function RecoverPaswordForm () {
                     <Button colorScheme={'yellow'} variant={'solid'} type="submit">
                         Enviar código
                     </Button>
+
+                    <Box
+                    justify={'center'}
+                    fontWeight="600"
+                    pt={2}
+                    color={"purple.200"}
+                    _hover={{ color: "purple.400" }}
+                    transition={'color 0.5s ease'}
+                    >
+                        <Link to='/login'> Volver a iniciar sesión </Link>
+                    </Box>
 
                 </Stack>
             </form>

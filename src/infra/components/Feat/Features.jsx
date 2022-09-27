@@ -1,5 +1,5 @@
 // components
-import { Flex, Box, SimpleGrid } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import Feature from "./atom/Feature";
 
 // icons
@@ -16,9 +16,9 @@ export default function Features () {
         align={['center', 'stretch']}
         justify={['center', 'space-between']}
         gap={8}
-        pt={16}
+        pt={24}
         px={16}
-        pb={20}
+        pb={24}
         >
             <Feature
             icon={<TradeIcon w={8} h={8} />}
