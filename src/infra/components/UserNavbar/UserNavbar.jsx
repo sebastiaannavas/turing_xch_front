@@ -1,8 +1,12 @@
+// dependencies
+import axios from "axios";
+import { GET } from "../../api/endpoints";
+
 // routes
 import { Navigate, Outlet } from "react-router-dom"
 
 // hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // components
 import NavContainer from "../Navbar/atom/NavContainer";
@@ -13,14 +17,32 @@ import UserLinks from "../Navbar/atom/UserLinks";
 
 export default function UserNavbar () {
 
+    const [isOpen, setIsOpen] = useState(false);
+  
+    const toggle = () => setIsOpen(!isOpen);
+
+    const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem("auth")}` }
+    };
+
+    const getJwt = async () => {
+
+        await axios.get(GET.JWT_VER, config)
+        .then( response => {
+            console.log(response.data.msg);
+        })
+        .catch( error => {
+            console.log(error.response.data.error);
+            localStorage.removeItem("auth");
+        });
+    };
+
+    useEffect(() => { getJwt(); }, []);
+
     if (!localStorage.getItem("auth")) {
         
         return <Navigate replace to="/signin" />;
     }
-
-    const [isOpen, setIsOpen] = useState(false);
-  
-    const toggle = () => setIsOpen(!isOpen);
 
     return (
         <>

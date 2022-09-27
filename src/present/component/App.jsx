@@ -52,7 +52,7 @@ function App() {
 				<Route path="deposits" element={ <Deposits /> } />
 				<Route path="dashboard" element={ <Dashboard /> }>
 					<Route index element={<MiPerfil />}/>
-					<Route path="security" element={<Seguridad />}/>
+					{/* <Route path="security" element={<Seguridad />}/> */}
 					<Route path="balance" element={<BalanceDeActivos />}/>
 					<Route path="support" element={<Soporte />}/>
 				</Route>

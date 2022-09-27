@@ -1,34 +1,36 @@
+// dependencies
+import axios from "axios";
+import { GET } from "../../../api/endpoints";
+
+// hooks
+import { useState, useEffect } from "react";
+
 // components
 import { Stack, Heading, SimpleGrid, Box, Flex, Text,
-  	Table,
-	Thead,
-	Tbody,
-	Tr,
-	Th,
-	Td,
-	TableContainer
 } from "@chakra-ui/react";
 
 // icons
-import { FaBitcoin } from "react-icons/fa"
+import { SiDash, SiLitecoin, SiRipple, SiMonero, SiZcash } from "react-icons/si"
+import { GiTwoCoins } from "react-icons/gi"
 
-const Asset = () => {
+export const Asset = ( {icon, name, value} ) => {
 
 	return (
 
 		<Flex bg='whiteAlpha.50' px={3} py={2} fontSize="sm" w={"full"} color="white">
 
 			<Stack flex={1} direction={"row"} align={"center"} spacing={4}>
-				<FaBitcoin color="#ffce1f" size={"2em"} />
+				{icon}
 				<Stack spacing={-0.2}>
-					<Text fontWeight={"bold"}> USDT </Text>
-					<Text> TheterUS </Text>
+					<Text fontWeight={"bold"}> {name} </Text>
+					{/* <Text> TheterUS </Text> */}
 				</Stack>
 			</Stack>
 
-			<Stack flex={1} spacing={-0.2}>
-				<Text fontWeight={"bold"} align={"right"}> 1,913.15 </Text>
-				<Text align={"right"}> ≈ 1,913.15 BUSD </Text>
+			{/* <Stack flex={1} spacing={-0.2}> */}
+			<Stack flex={1} align={"right"} justify={"center"}>
+				<Text fontWeight={"bold"} align={"right"}> {value} </Text>
+				{/* <Text align={"right"}> ≈ 1,913.15 BUSD </Text> */}
 			</Stack>
 
 		</Flex>
@@ -36,6 +38,35 @@ const Asset = () => {
 }
 
 export default function Assets () {
+
+	const [balance, setBalance] = useState({});
+
+    const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem("auth")}` }
+    };
+
+    const getBalance = async () => {
+
+        await axios.get(GET.BALANCE, config)
+        .then( response => {
+            console.log(response.data.msg);
+            setBalance(response.data.msg);
+            // setLoading(false);
+        })
+        .catch( error => {
+            console.log(error);
+        });
+    };
+
+    useEffect(() => { getBalance();
+
+        // window.addEventListener("load", getBalance);
+
+        // return () => {
+        //     window.removeEventListener("load", getBalance);
+        // };
+
+    }, []);
 
     return (
       <>
@@ -58,46 +89,18 @@ export default function Assets () {
 			</Flex>
 
 			<Stack
+			pt={4}
 			width={"full"}
 			overflowY={"auto"}
 			>
-				<Asset />
-				<Asset />
-				<Asset />
-				<Asset />
-				<Asset />
-				<Asset />
+				<Asset icon={<GiTwoCoins color="#ffce1f" size={"2em"} />} name={"USDT"} value={balance.usdt} />
+				<Asset icon={<SiRipple color="#ffce1f" size={"2em"} />} name={"XRP"} value={balance.xrp} />
+				<Asset icon={<SiLitecoin color="#ffce1f" size={"2em"} />} name={"LTC"} value={balance.ltc} />
+				<Asset icon={<SiMonero color="#ffce1f" size={"2em"} />} name={"XMR"} value={balance.xmr} />
+				<Asset icon={<SiDash color="#ffce1f" size={"2em"} />} name={"DASH"} value={balance.dash} />
+				<Asset icon={<SiZcash color="#ffce1f" size={"2em"} />} name={"ZCASH"} value={balance.zcash} />
 			</Stack>
-
-			{/* <TableContainer
-				overflow={"hidden"}
-				pt={2}
-				color={"purple.200"}
-				>
-					<Table 
-					size={"md"}
-					>
-						<Thead>
-						<Tr>
-							<Th color={"purple.500"}> Moneda </Th>
-							<Th color={"purple.500"} isNumeric> Cantidad </Th>
-						</Tr>
-						</Thead>
-						<Tbody>
-						<Tr>
-							<Td> 
-							Hola
-							</Td>
-							<Td isNumeric> 19.55 </Td>
-						</Tr>
-						<Tr>
-							<Td> Venta (XRP) </Td>
-							<Td isNumeric> 30.48 </Td>
-						</Tr>
-						</Tbody>
-					</Table>
-				</TableContainer> */}
-			</Stack>
+		</Stack>
       </>
     );
 }

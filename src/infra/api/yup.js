@@ -5,7 +5,7 @@ const ERROR_YUP = {
     MSG_NAME: "Sólo se permiten carácteres alfabéticos en este campo.",
     MSG_EMAIL: "Ingresa una dirección de correo válida.",
     MSG_TLF: "El formato no es válido.",
-    MSG_PSW: "Incluye al menos una mayúscula, un número y un carácter especial.",
+    MSG_PSW: "Al menos una mayúscula, número y carácter especial.",
     MSG_OKPSW: "Las contraseñas deben coincidir.",
     MSG_MENSAJE: "La longitud máxima de caracteres es de 70.",
     MSG_DESTINATION: "Ingresa una dirección de correo válida.",
@@ -23,7 +23,7 @@ const schema = {
     
         email: yup.string().email().required(), 
 
-        tlf: yup.string().min(13).max(13).required(),
+        tlf: yup.string().min(13).max(13).required().matches(/^[+]?[1-9]+$/),
     
         psw: yup.string().required().min(8).max(18)
         .matches(/^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/),

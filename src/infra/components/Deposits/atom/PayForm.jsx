@@ -1,6 +1,4 @@
 // dependencies
-import axios from "axios";
-import { POST } from "../../../api/endpoints";
 import { schema, ERROR_YUP } from "../../../api/yup";
 
 // hooks
@@ -11,7 +9,7 @@ import { useToast } from "@chakra-ui/react";
 
 // components
 import { Heading, Flex, Stack, Tabs, TabList, TabPanels, Tab, TabPanel, FormControl, FormLabel, FormErrorMessage, Input, 
-		 Select, Textarea, Button, Text, Radio
+		 Select, Textarea, Button, Badge
 } from "@chakra-ui/react";
 
 
@@ -21,7 +19,14 @@ export default function PayForm () {
         resolver: yupResolver(schema.deposits)
     });
 
-	// const [token, setToken] = useState("");
+	const [type, setType] = useState("email");
+
+	const handleType = evt => {
+
+		const { value } = evt.target;
+
+		setType( value ); 
+	}
 
 	const toast = useToast();
 
@@ -37,16 +42,14 @@ export default function PayForm () {
 
 	const onSubmit = async ( payload ) => {
 
-		console.log(JSON.stringify(payload));
+		payload = {...payload, type: type}
 
-		// setToken(localStorage.getItem("auth"));
-		// const token = localStorage.getItem("auth");
+		// console.log(JSON.stringify(payload));
 
 		const config = {
 			headers: { Authorization: `Bearer ${localStorage.getItem("auth")}` }
 		};
 
-        // await axios.get("https://resplendent-profiterole-d15e2e.netlify.app/getCheckJwt", config)
         await axios.post(POST.DEPOSIT, payload, config)
         .then( response => {
 			console.log(response);
@@ -64,9 +67,9 @@ export default function PayForm () {
 			w={['100%', '50%']}
 			color={"white"}
 			// align={"center"}
-			// justify="center"
+			justify="space-between"
 			p={6}
-			spacing={4}
+			// spacing={4}
 			rounded="lg"
 			borderWidth={"1px"}
 			borderColor={"purple.900"}
@@ -74,24 +77,40 @@ export default function PayForm () {
 			>
 				<form onSubmit={handleSubmit(onSubmit)}>
 
-					<Heading size={"xs"} color="white" pb={4}> Selecciona la cuenta destino </Heading>
+					<Heading size={"xs"} color="white" 
+					pb={4}
+					> Selecciona la cuenta destino </Heading>
 					<Tabs variant='unstyled' bg={"#1F0D3A"} rounded="lg">
 
 							<TabList>
 								<FormLabel>
 									<Tab 
 									_selected={{ color: 'white', bg: 'blue.500', rounded: 'lg' }}
+									value="email" onClick={handleType}
 									> 
-										<input type="radio" value="email" id="email" {...register("type")} 
-										/>
+										{/* <input type="radio" value="email" id="email" {...register("type")} 
+										/> */}
 										Email
 									</Tab>
 								</FormLabel>
 								<FormLabel>
-									<Tab _selected={{ color: 'white', bg: 'blue.500', rounded: 'lg' }}> ID </Tab>
+									<Tab _selected={{ color: 'white', bg: 'blue.500', rounded: 'lg' }}
+									value="uuid" onClick={handleType}
+									> 
+									ID 
+									<Badge ml={3} colorScheme="yellow">
+										Beta
+									</Badge>
+									</Tab>
 								</FormLabel>
 								<FormLabel>
-									<Tab _selected={{ color: 'white', bg: 'blue.500', rounded: 'lg' }}> Alias </Tab>
+									<Tab _selected={{ color: 'white', bg: 'blue.500', rounded: 'lg' }}
+									value="tlf" onClick={handleType}
+									> Teléfono 
+									<Badge ml={3} colorScheme="yellow">
+										Beta
+									</Badge>
+									</Tab>
 								</FormLabel>
 							</TabList>
 
@@ -105,16 +124,16 @@ export default function PayForm () {
 									<FormErrorMessage> {errors.destination && ERROR_YUP.MSG_DESTINATION} </FormErrorMessage>
 								</TabPanel>
 								<TabPanel>
-									{/* <Input type="text" size="md" placeholder="XXX-XXX-XXX" 
-									{...register("name")}
+									<Input type="text" size="md" placeholder="XXX-XXX-XXX" 
+									// {...register("name")}
 									/>
-									<FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage> */}
+									{/* <FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage> */}
 								</TabPanel>
 								<TabPanel>
-									{/* <Input type="text" size="md" placeholder="enigma_cracker_52"
-									{...register("name")}
+									<Input type="tel" size="md" placeholder="+584121234567"
+									// {...register("name")}
 									/>
-									<FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage> */}
+									{/* <FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage> */}
 								</TabPanel>
 							</TabPanels>
 
@@ -130,11 +149,14 @@ export default function PayForm () {
 								<Heading size={"xs"}  pb={2}> Método de pago </Heading>
 							</FormLabel>
 							<Select 
-							placeholder='Selecciona una moneda' color={"purple.500"}
+							placeholder='Selecciona una moneda' color={"purple.600"} fontWeight={600}
 							{...register("money")}>
 								<option value='USDT'>USDT</option>
 								<option value='XRP'>XRP</option>
 								<option value='LTC'>LTC</option>
+								<option value='XMR'>XMR</option>
+								<option value='DASH'>DASH</option>
+								<option value='ZCASH'>ZCASH</option>
 							</Select>
 							<FormErrorMessage> {errors.money && ERROR_YUP.MSG_MONEY} </FormErrorMessage>
 						</FormControl>
@@ -162,8 +184,8 @@ export default function PayForm () {
 						<FormErrorMessage> {errors.note && ERROR_YUP.MSG_NOTE} </FormErrorMessage>
                     </FormControl>
 
-					<Flex pt={8} gap={8}>
-						<Text pt={2}> *La transacción se realizará en modo público </Text>
+					<Flex pt={6} gap={8}>
+						{/* <Text pt={2}> *La transacción se realizará en modo público </Text> */}
                         <Button colorScheme={'yellow'} variant={'solid'} flex={1} type="submit">
                             Pagar
                         </Button>

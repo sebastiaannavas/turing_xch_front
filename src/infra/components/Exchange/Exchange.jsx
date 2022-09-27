@@ -10,6 +10,24 @@ import { Flex, Text, Box, Stack, Tabs, Tab, TabList, TabPanels, TabPanel, Grid, 
 } from "@chakra-ui/react";
 import BuyForm from "./atom/BuyForm";
 import SellForm from "./atom/SellForm";
+import { ChartIcon } from "../../../app/common/Icons/ChartIcon";
+
+
+const TableHead = () => {
+
+    return(
+        <Thead>
+            <Tr>
+                <Th color={'white'}>Fecha</Th>
+                <Th color={'white'}>Hora</Th>  
+                <Th color={'white'}>Persona</Th>
+                <Th color={'white'}>Monto</Th>
+                <Th color={'white'}>Balance</Th>
+            </Tr>
+        </Thead>
+    )
+}
+
 
 export default function Exchange() {
 
@@ -34,7 +52,7 @@ export default function Exchange() {
 						h="100%"
 						opacity={0.35}
 						>
-							<Text color="white"> K-Lines </Text>
+							<ChartIcon w={"380px"} h={"380px"} mr={4}/>
 						</Stack>
 					</GridItem>
 					
@@ -53,7 +71,7 @@ export default function Exchange() {
 							color={"purple.800"}
 							mb='1em'>
 								<Tab fontWeight="600" > MERCADO </Tab>
-								<Tab fontWeight="600" > LÍMITE </Tab>
+								{/* <Tab fontWeight="600" > LÍMITE </Tab> */}
 							</TabList>
 							<TabPanels
 							>
@@ -89,9 +107,9 @@ export default function Exchange() {
 									</Flex>
 
 								</TabPanel>
-								<TabPanel>
+								{/* <TabPanel>
 									<p> LIMIT </p>
-								</TabPanel>
+								</TabPanel> */}
 							</TabPanels>
 						</Tabs>
 					</GridItem>
@@ -106,30 +124,36 @@ export default function Exchange() {
 						>
 							<Heading size={"sm"} color="white" p={2}> Historial de Órdenes </Heading>
 							<TableContainer
-							overflow={"hidden"}
+							h={"100px"}
+							overflowY={"auto"}
 							pt={2}
 							color={"purple.200"}
 							>
 								<Table 
 								size={"sm"}
 								>
-									<Thead>
-									<Tr>
-										<Th color={"purple.500"}> Tiempo </Th>
-										<Th color={"purple.500"}> Tipo </Th>
-										<Th color={"purple.500"} isNumeric> Cantidad </Th>
-									</Tr>
-									</Thead>
+									<TableHead />
 									<Tbody>
 									<Tr>
 										<Td> 14-09-2022 </Td>
 										<Td> Compra (USDT) </Td>
-										<Td isNumeric> 19.55 </Td>
+										<Td> 19.55 </Td>
+										<Td> 19.55 </Td>
+										<Td> 19.55 </Td>
 									</Tr>
 									<Tr>
 										<Td> 14-09-2022 </Td>
-										<Td> Venta (XRP) </Td>
-										<Td isNumeric> 30.48 </Td>
+										<Td> Compra (USDT) </Td>
+										<Td> 19.55 </Td>
+										<Td> 19.55 </Td>
+										<Td> 19.55 </Td>
+									</Tr>
+									<Tr>
+										<Td> 14-09-2022 </Td>
+										<Td> Compra (USDT) </Td>
+										<Td> 19.55 </Td>
+										<Td> 19.55 </Td>
+										<Td> 19.55 </Td>
 									</Tr>
 									</Tbody>
 								</Table>

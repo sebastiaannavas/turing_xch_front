@@ -8,8 +8,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useToast } from "@chakra-ui/react";
 
 // components
-import { Button, FormControl, FormErrorMessage, Input, 
-         Stack, InputGroup, InputLeftAddon, InputRightAddon
+import { Button, FormControl, FormErrorMessage, Input, Select, Heading,
+         Stack, InputGroup, InputLeftAddon, InputRightAddon, Flex, Box
 } from '@chakra-ui/react';
 
 
@@ -34,28 +34,47 @@ export default function BuyForm () {
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Stack
-                gap={4}
+                // w={"100%"}
+                // justify={"space-between"}
+                gap={2}
                 >
                     <FormControl isInvalid={errors.name}>
+							<Select
+							placeholder='Selecciona una moneda' color={"purple.600"} fontWeight={600}
+							{...register("name")}>
+								<option value='USDT'>USDT</option>
+								<option value='XRP'>XRP</option>
+								<option value='LTC'>LTC</option>
+								<option value='XMR'>XMR</option>
+								<option value='DASH'>DASH</option>
+								<option value='ZCASH'>ZCASH</option>
+							</Select>
+							<FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
+					</FormControl>
+
+                    <Box
+                    // w={"full"}
+                    overflow="hidden"
+                    py={2}
+                    rounded={'lg'}
+                    textAlign={'center'}
+                    color={'gray.500'}
+                    bg={'gray.800'}
+                    >
+                        <div style={{ overflow: "auto" }}>
+                        {"00.0000000000000000000"}
+                        </div>
+                    </Box>
+
+                    <FormControl isInvalid={errors.name}>
                         <InputGroup>
-                            <InputLeftAddon children='Precio' bg={"transparent"} />
-                            <Input type="number" size="md" borderStartColor="transparent"
+                            {/* <InputLeftAddon children='Precio' bg={"transparent"} /> */}
+                            <Input type="number" size="md" value="00.00" 
                             {...register("name")}
                             />
-                            <InputRightAddon children='XRP' />
+                            {/* <InputRightAddon children='XRP' /> */}
                         </InputGroup>
                         <FormErrorMessage> {errors.name && ERROR_YUP.MSG_NAME} </FormErrorMessage>
-                    </FormControl>
-
-                    <FormControl isInvalid={errors.email}>
-                        <InputGroup>
-                            <InputLeftAddon children='Cantidad' />
-                            <Input type="number" size="md" 
-                            {...register("email")}
-                            />
-                            <InputRightAddon children='USDT' />
-                        </InputGroup>
-                        <FormErrorMessage> {errors.email && ERROR_YUP.MSG_EMAIL} </FormErrorMessage>
                     </FormControl>
 
                     <Stack pt={4}>

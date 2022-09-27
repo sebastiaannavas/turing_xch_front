@@ -10,7 +10,8 @@ import { useState, useEffect } from 'react';
 
 // components
 import { Button, Flex, Heading, Stack, Spinner } from '@chakra-ui/react';
-import Avatar from 'boring-avatars';
+// import Avatar from 'boring-avatars';
+import MyAvatar from "../MyAvatar/MyAvatar";
 
 
 function FirstPanel(){
@@ -40,11 +41,13 @@ function FirstPanel(){
 
     useEffect(() => { 
 
-        window.addEventListener("load", getUser);
+        getUser();
 
-        return () => {
-            window.removeEventListener("load", getUser);
-        };
+        // window.addEventListener("load", getUser);
+
+        // return () => {
+        //     window.removeEventListener("load", getUser);
+        // };
 
     }, []);
 
@@ -52,9 +55,11 @@ function FirstPanel(){
 
         <Flex
             flex={0.25}
-            bg={'gray.400'}
+            bg={'purple.900'}
             direction={'column'}
-            // alignItems={'space-between'}
+            justify={'center'}
+            color="white"
+            pb={2}
             >
 
             {loading && 
@@ -72,17 +77,20 @@ function FirstPanel(){
             <>
             <Stack
                 // width={'full'}
-                pt={10}
-                pb={6}
-                gap={2}
+                // pt={10}
+                pb={8}
+                gap={4}
                 direction={'column'}
                 alignItems={'center'}>
-                <Avatar 
+                
+                <MyAvatar size={"120px"} />
+
+                {/* <Avatar 
                     size={'120px'}
-                    name={profile.name}
+                    // name={profile.name}
                     variant='bauhaus'
 					colors={["#9d4edd", "#613dc1", "#f72585", "#ffce1f", "#ff6d00"]}
-                    />
+                    /> */}
                 <Heading size="lg">
                     {profile.name}
                 </Heading>
@@ -91,30 +99,38 @@ function FirstPanel(){
                 px={10}
                 // display={'flex'}
                 // alignItems={'space-between'}
-                gap={4}>
+                gap={4}
+                >
                 <Link to=''>
-                    <Button variant={'ghost'} width={'full'} >
+                    <Button variant={'ghost'} width={'full'} 
+                    _hover={{ bg: 'purple.700' }}
+                    >
                         Mi perfil
                     </Button>
                 </Link>
-                <Link to='security'>
+
+                {/* <Link to='security'>
                     <Button variant={'ghost'} width={'full'} >
                         Seguridad
                     </Button>
-                </Link>
+                </Link> */}
+
                 <Link to='balance'>
-                    <Button variant={'ghost'} width={'full'} >
+                    <Button variant={'ghost'} width={'full'} 
+                    _hover={{ bg: 'purple.700' }}
+                    >
                         Balance de activos
                     </Button>
                 </Link>
-                <Link to='support'>
-                    <Button variant={'ghost'} width={'full'} >
+                {/* <Link to='support'>
+                    <Button variant={'ghost'} width={'full'} 
+                    _hover={{ bg: 'purple.700' }}
+                    >
                         Soporte
                     </Button>
-                </Link>
+                </Link> */}
                 <Link to="/">
                     <Button
-                        variant={'outline'}
                         width={'full'}
                         colorScheme="red"
                         onClick={logout}>

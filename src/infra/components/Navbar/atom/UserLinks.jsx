@@ -20,11 +20,12 @@ import { Box, Stack, Badge,
 	MenuDivider,
 
 } from "@chakra-ui/react";
-import Avatar from 'boring-avatars';
+// import Avatar from 'boring-avatars';
 
 // icons
 import { Info } from "@mui/icons-material";
 import { MoonIcon } from "@chakra-ui/icons";
+import MyAvatar from "../../MyAvatar/MyAvatar";
 
 const NavGroup = ( { children, isOpen } ) => {
 
@@ -51,12 +52,11 @@ export default function UserLinks ( {isOpen} ) {
 	return (
 		<>
 			<NavGroup isOpen={isOpen}>
-				<Box
+				{/* <Box
 				_hover={{ color: "purple.400" }}
 				transition={'color 0.5s ease'}
 				>
 					<Link to="" style={{ fontWeight: "bold" }}> Exchange </Link> 
-					{/* exchange */}
 				</Box>
 
 				<Box
@@ -64,25 +64,23 @@ export default function UserLinks ( {isOpen} ) {
 				transition={'color 0.5s ease'}
 				>
 					<Link to="prices" style={{ fontWeight: "bold" }}> 
-						Mercado 
-						<Badge ml={2} colorScheme="yellow">
-							Beta
-						</Badge>
+						Recarga 
 					</Link>
-				</Box>
+				</Box> */}
 
 				<Box
 				_hover={{ color: "purple.400" }}
 				transition={'color 0.5s ease'}
 				>
 					<Link to="deposits" style={{ fontWeight: "bold" }}> Depósitos </Link>
+					{/* pagos */}
 				</Box>
 
 				<Stack
 				direction={"row"}
 				spacing={8}
 				>
-					<Box
+					{/* <Box
 					as="button"
 					color={"yellow.400"}
 					pb={1}
@@ -90,7 +88,7 @@ export default function UserLinks ( {isOpen} ) {
 					transition={'color 0.5s ease'}
 					>
 						<MoonIcon />
-					</Box>
+					</Box> */}
 
 					<Popover>
 						<PopoverTrigger>
@@ -107,8 +105,9 @@ export default function UserLinks ( {isOpen} ) {
 						<PopoverContent bg={"purple.500"}>
 							<PopoverArrow />
 							<PopoverCloseButton />
-							<PopoverHeader fontWeight={"600"}> Binance API </PopoverHeader>
-							<PopoverBody> Activos circulando: USDT 12.5 </PopoverBody>
+							<PopoverBody fontWeight={"600"} > Binance API </PopoverBody>
+							{/* <PopoverHeader fontWeight={"600"}> Binance API </PopoverHeader>
+							<PopoverBody> Activos circulando: USDT 12.5 </PopoverBody> */}
 						</PopoverContent>
 					</Popover>
 
@@ -116,13 +115,7 @@ export default function UserLinks ( {isOpen} ) {
 						<MenuButton 
 						as={"button"} 
 						>
-							<Avatar
-							name="Alan"
-							// TODO: reducer for first panel name
-							size={"50px"}
-							variant='bauhaus'
-							colors={["#9d4edd", "#613dc1", "#f72585", "#ffce1f", "#ff6d00"]}
-							/>
+							<MyAvatar size={"50px"} />
 						</MenuButton>
 						<MenuList 
 						bg={"purple.500"} 
@@ -138,16 +131,19 @@ export default function UserLinks ( {isOpen} ) {
 								<Link to="dashboard/balance">
 									<MenuItem> Wallet </MenuItem>
 								</Link>
+								<Link to="dashboard/support">
+									<MenuItem> Soporte </MenuItem>
+								</Link>
 							</MenuGroup>
-							<MenuDivider />
-							<MenuGroup title='Configuración'>
+							{/* <MenuDivider /> */}
+							{/* <MenuGroup title='Configuración'>
 								<Link to="dashboard/security">
 									<MenuItem> Seguridad </MenuItem>
 								</Link>
 								<Link to="dashboard/support">
 									<MenuItem> Soporte </MenuItem>
 								</Link>
-							</MenuGroup>
+							</MenuGroup> */}
 							<MenuDivider />
 								<Link to="/">
 									<MenuItem

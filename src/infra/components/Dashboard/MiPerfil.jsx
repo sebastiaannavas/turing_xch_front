@@ -4,18 +4,22 @@ import { GET } from "../../api/endpoints";
 
 // hooks
 import { useState, useEffect } from 'react';
+import { useToast } from "@chakra-ui/react";
 
 // components
 import { Box, Button, Flex, Divider, 
-         Heading, Input, Spinner
+         Heading, Spinner,
+
+         chakra, Tag, Text
 } from '@chakra-ui/react';
+import { Email } from '@mui/icons-material';
 
 
 function MiPerfil () {
 
     const [loading, setLoading] = useState(true);
 
-    const [profile, setProfile] = useState();
+    const [profile, setProfile] = useState({});
 
     const config = {
         headers: { Authorization: `Bearer ${localStorage.getItem("auth")}` }
@@ -34,13 +38,38 @@ function MiPerfil () {
         });
     };
 
+    const toast = useToast();
+
+    const resultToast = ( status, title ) => {
+
+        return toast({
+            title: title,
+            status: status,
+            duration: 5000,
+            isClosable: true,
+        });
+    };
+
+    const getEmail = async () => {
+
+        await axios.get(GET.EMAIL_REVER + profile.email)
+        .then( response => {
+            resultToast("success", `${response.data.msg} 🎉`);
+        })
+        .catch( error => {
+            resultToast("error", `${error.response.data.error} 😟`);
+        });
+    };
+
     useEffect(() => { 
+        
+        getUser();
 
-        window.addEventListener("load", getUser);
+        // window.addEventListener("load", getUser);
 
-        return () => {
-            window.removeEventListener("load", getUser);
-        };
+        // return () => {
+        //     window.removeEventListener("load", getUser);
+        // };
 
     }, []);
 
@@ -48,9 +77,14 @@ function MiPerfil () {
     return (
         <Flex
         flex={0.75}
-        bg='gray.700'
         direction={'column'}
         justifyContent={'space-between'}
+        // gap={10}
+        borderColor={"purple.400"}
+        borderWidth={"2px"}
+        rounded={"lg"}
+        mx={4}
+        my={6}
         p={10}
         >
 
@@ -87,13 +121,14 @@ function MiPerfil () {
                     Nombre y Apellido
                 </Heading>
                 <Box
-                minW={"250px"}
+                minW={"345px"}
                 py={2}
                 rounded={'lg'}
                 textAlign={'center'}
-                color={'gray.500'}
-                bg={'gray.800'}
+                color={'white'}
+                bg={'purple.600'}
                 >
+                    {/* Hola */}
                     {profile.name}
                 </Box>         
             </Flex>
@@ -110,13 +145,14 @@ function MiPerfil () {
                     Dirección de correo electrónico
                 </Heading>
                 <Box
-                minW={"250px"}
+                minW={"345px"}
                 py={2}
                 rounded={'lg'}
                 textAlign={'center'}
-                color={'gray.500'}
-                bg={'gray.800'}
+                color={'white'}
+                bg={'purple.600'}
                 >
+                    {/* Hola */}
                     {profile.email}
                 </Box>         
             </Flex>
@@ -133,13 +169,14 @@ function MiPerfil () {
                     ID de la cuenta
                 </Heading>
                 <Box
-                minW={"250px"}
+                minW={"345px"}
                 py={2}
                 rounded={'lg'}
                 textAlign={'center'}
-                color={'gray.500'}
-                bg={'gray.800'}
+                color={'white'}
+                bg={'purple.600'}
                 >
+                    {/* Hola */}
                     {profile.uuid}
                 </Box>         
             </Flex>
@@ -148,7 +185,7 @@ function MiPerfil () {
             direction={{ base: 'column', md: 'row' }}
             align="center"
             justifyContent={'space-between'}
-            // mb={2}
+            mb={2}
             >
                 <Heading
                 fontWeight={'bold'}
@@ -157,13 +194,14 @@ function MiPerfil () {
                     Teléfono
                 </Heading>
                 <Box
-                minW={"250px"}
+                minW={"345px"}
                 py={2}
                 rounded={'lg'}
                 textAlign={'center'}
-                color={'gray.500'}
-                bg={'gray.800'}
+                color={'white'}
+                bg={'purple.600'}
                 >
+                    {/* Hola */}
                     {profile.tlf}
                 </Box>         
             </Flex>
@@ -171,25 +209,35 @@ function MiPerfil () {
             <Divider orientation='horizontal' />
 
             <Heading
+                // pt={2}
                 color={'yellow.200'}
                 fontWeight={'bold'}
-                fontSize={'xl'}
-                >
-                Cambiar dirección de correo electrónico
+                fontSize={'xl'}>
+                Seguridad
             </Heading>
-
-            <form>
-                <Flex
-                direction={'column'}
-                gap={4}
+            <Flex
+                align="center"
+                direction={{ base: 'column', md: 'row' }}
+                justifyContent={'space-between'}
                 >
-                    <Input type="email" placeholder="alan@turing.com"/>
-                    
-                    <Button colorScheme={'blue'} variant={'solid'}>
-                        Guardar correo
-                    </Button>
-                </Flex>
-            </form>
+                <chakra.h3
+                    fontWeight={'bold'}
+                    fontSize={'md'}
+                    color={'white'}>
+                    <Flex gap={6} alignItems={'center'}>
+                        <Email size={20} />
+                        <Text> Correo electrónico </Text>
+                        <Tag 
+                        variant="solid" 
+                        colorScheme={profile.verified == true ? "green" : "gray"}> 
+                            {profile.verified == true ? "Verificado" : "No verificado"} 
+                        </Tag>
+                    </Flex>
+                </chakra.h3>
+                <Button colorScheme={'yellow'} variant={'solid'} onClick={getEmail}>
+                    Verificar
+                </Button>         
+            </Flex>
             </>
             }
         </Flex>

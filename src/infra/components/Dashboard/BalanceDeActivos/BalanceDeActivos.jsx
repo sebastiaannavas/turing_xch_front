@@ -7,34 +7,10 @@ import { useState, useEffect } from 'react';
 
 // components
 import { Flex, Tabs, TabList, TabPanels, Tab, Spinner,
-         TabPanel, Table, Thead, Tbody, Tr, Th, TableContainer
+         TabPanel, Table, Thead, Tbody, Tr, Th, Td, TableContainer
 } from '@chakra-ui/react';
 
-
 import RowUSDT from './atom/RowUSDT';
-// import RowXRP from './atom/RowXRP';
-// import RowLTC from './atom/RowLTC';
-// import RowXMR from './atom/RowXMR';
-// import RowDASH from './atom/RowDASH';
-// import RowZCASH from './atom/RowZCASH';
-
-
-const operacionesUSDT = [
-    {
-    tipo: 'ingreso',
-    fecha: 'xx/xx/xx',
-    hora: 'xx:xx',
-    monto: 10.00,
-    saldo: 'queda',
-    },
-    {
-    tipo: 'egreso',
-    fecha: 'xx/xx/xx',
-    hora: 'xx:xx',
-    monto: 1000.00,
-    saldo: 'queda',
-    }
-];
 
 
 function TableHead(){
@@ -52,11 +28,25 @@ function TableHead(){
     )
 }
 
+function TableHeader(){
+
+    return(
+        <Thead>
+            <Tr>
+                <Th color={'white'}>Moneda</Th>
+                <Th color={'white'}>Cantidad</Th>
+            </Tr>
+        </Thead>
+    )
+}
+
 function BalanceDeActivos(){
 
     const [loading, setLoading] = useState(true);
 
-    const [movements, setMovements] = useState();
+    const [movements, setMovements] = useState({});
+
+    // const [balance, setBalance] = useState({});
 
     const config = {
         headers: { Authorization: `Bearer ${localStorage.getItem("auth")}` }
@@ -67,7 +57,9 @@ function BalanceDeActivos(){
         await axios.get(GET.MOVEMENTS, config)
         .then( response => {
             console.log(response.data.movements);
+            console.log(response.data.balance);
             setMovements(response.data.movements);
+            // setBalance(response.data.balance);
             setLoading(false);
         })
         .catch( error => {
@@ -77,33 +69,33 @@ function BalanceDeActivos(){
 
     useEffect(() => { 
 
-        window.addEventListener("load", getDeposits);
+        getDeposits();
 
-        return () => {
-            window.removeEventListener("load", getDeposits);
-        };
+        // window.addEventListener("load", getDeposits);
+
+        // return () => {
+        //     window.removeEventListener("load", getDeposits);
+        // };
 
     }, []);
 
     return(
         <Flex
             flex={0.75}
-            bg='gray.700'
+            // bg='gray.700'
             direction={'column'}
             p={10}>
                 <Tabs 
                 isFitted variant='enclosed'
                 h={"75vh"}
-                bg="#1F0D3A"
+                bg="purple.900"
                 rounded={"lg"}
                 >
                     <TabList mb={2} bg={'white'} rounded={"lg"}>
-                        <Tab>USDT</Tab>
-                        {/* <Tab>XRP</Tab>
-                        <Tab>LTC</Tab>
-                        <Tab>XMR</Tab>
-                        <Tab>DASH</Tab>
-                        <Tab>ZCASH</Tab> */}
+
+                        {/* <Tab  fontWeight="bold"> Wallet </Tab> */}
+                        <Tab  fontWeight="bold"> Movimientos </Tab>
+
                     </TabList>
                     <TabPanels>
 
@@ -128,7 +120,7 @@ function BalanceDeActivos(){
                             overflowY={"auto"}
                             >
                                 <Table>
-                            <TableHead />
+                                    <TableHead />
                                     <Tbody>
                                         {movements.map((content) => (
                                         <RowUSDT {...content}/>
@@ -139,6 +131,39 @@ function BalanceDeActivos(){
                             </>
                         }
                         </TabPanel>
+
+                        {/* <TabPanel>
+
+                        {loading && 
+                        <Spinner
+                        thickness='4px'
+                        speed='0.65s'
+                        emptyColor='gray.200'
+                        color='purple.500'
+                        size='xl'
+                        />
+                        }
+
+                        {!loading && 
+
+                        <>
+
+                            <TableContainer
+                            h={"55vh"}
+                            overflowY={"auto"}
+                            >
+                                <Table>
+                                    <TableHead />
+                                    <Tbody>
+                                        {balance.map((content) => (
+                                        <RowLTC {...content}/>
+                                        ))}
+                                    </Tbody>
+                                </Table>
+                            </TableContainer>
+                            </>
+                        }
+                        </TabPanel> */}
                     </TabPanels>
                 </Tabs>
         </Flex>

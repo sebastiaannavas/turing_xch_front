@@ -13,7 +13,7 @@ import { useToast } from "@chakra-ui/react";
 // components
 import { Button, FormControl, FormLabel, FormErrorMessage, Input, 
          Stack, InputGroup, InputRightElement, IconButton, Box,
-         InputLeftAddon
+         InputLeftAddon, Flex
 } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 
@@ -97,10 +97,12 @@ export default function SignForm () {
                         <FormErrorMessage> {errors.tlf && ERROR_YUP.MSG_TLF} </FormErrorMessage>
                     </FormControl>
 
+                    <Stack direction={"row"} gap={2}>
+
                     <FormControl isInvalid={errors.psw}>
                         <FormLabel> Contraseña </FormLabel>
                             <InputGroup size="md">
-                                <Input placeholder="Ingresa una contraseña" type={show ? 'text' : 'password'}
+                                <Input placeholder="Ingresar" type={show ? 'text' : 'password'}
                                 {...register("psw")}
                                 />
                                 <InputRightElement>
@@ -115,7 +117,7 @@ export default function SignForm () {
                     <FormControl isInvalid={errors.okPsw}>
                         <FormLabel> Confirmar contraseña </FormLabel>
                             <InputGroup size="md">
-                                <Input placeholder="Confirma tu contraseña" type={showOk ? 'text' : 'password'}
+                                <Input placeholder="Volver a ingresar" type={showOk ? 'text' : 'password'}
                                 {...register("okPsw")}
                                 />
                                 <InputRightElement>
@@ -126,7 +128,8 @@ export default function SignForm () {
                             </InputGroup>
                         <FormErrorMessage> {errors.okPsw && ERROR_YUP.MSG_OKPSW} </FormErrorMessage>   
                     </FormControl>
-                    
+                    </Stack>
+
                     <Stack pt={1}>
                         <Button colorScheme={'yellow'} variant={'solid'} type="submit">
                             Registrarse

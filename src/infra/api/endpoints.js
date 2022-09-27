@@ -1,8 +1,11 @@
 const GET = {
     // EMAIL_VER: "http://localhost:8888/getEmailVerification?emailToken="
+    JWT_VER: "https://resplendent-profiterole-d15e2e.netlify.app/getCheckJwt",
+    EMAIL_REVER: "https://resplendent-profiterole-d15e2e.netlify.app/getSendVerificationEmail?email=",
     EMAIL_VER: "https://resplendent-profiterole-d15e2e.netlify.app/getEmailVerification?emailToken=",
     RECOVER_PSW: "https://resplendent-profiterole-d15e2e.netlify.app/getChangePassEmail?email=",
     USER_PROFILE: "https://resplendent-profiterole-d15e2e.netlify.app/getUserProfile",
+    BALANCE: "https://resplendent-profiterole-d15e2e.netlify.app/getBalance",
     MOVEMENTS: "https://resplendent-profiterole-d15e2e.netlify.app/getMovements"
 }
 

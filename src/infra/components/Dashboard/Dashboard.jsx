@@ -11,7 +11,7 @@ export default function Dashboard () {
     return (
         <>
             <Flex
-                bg={'black'}
+                bg={'#16002A'}
                 h={"87vh"}
                 width={'full'}
                 direction={{ base: 'column', md: 'row'}}
